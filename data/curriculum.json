@@ -1,0 +1,1663 @@
+{
+  "modules": [
+    {
+      "id": "m1",
+      "number": "01",
+      "title": "The manager’s toolkit",
+      "subtitle": "Foundations, principles & responsibility",
+      "description": "Start with what managers do, then learn how they make responsible decisions.",
+      "color": "#c9f36b"
+    },
+    {
+      "id": "m2",
+      "number": "02",
+      "title": "Turn intent into a plan",
+      "subtitle": "Planning & strategy",
+      "description": "Choose the destination, compare routes, then commit resources.",
+      "color": "#9ebcff"
+    },
+    {
+      "id": "m3",
+      "number": "03",
+      "title": "Build the organization",
+      "subtitle": "Organizing & departmentation",
+      "description": "Give the plan a structure: tasks, people, authority and relationships.",
+      "color": "#d8b5fa"
+    },
+    {
+      "id": "m4",
+      "number": "04",
+      "title": "Find & grow your people",
+      "subtitle": "Talent acquisition & management",
+      "description": "Fill the structure with the right people and develop their capabilities.",
+      "color": "#ffbf91"
+    },
+    {
+      "id": "m5",
+      "number": "05",
+      "title": "Lead, connect & correct",
+      "subtitle": "Leadership, motivation & control",
+      "description": "Help people act, communicate and keep results aligned with the plan.",
+      "color": "#80ddcf"
+    },
+    {
+      "id": "sdl1",
+      "number": "S1",
+      "title": "Understand quality",
+      "subtitle": "Quality control foundations",
+      "description": "Connect customer needs to design, conformance, performance and assurance.",
+      "color": "#ffd773"
+    },
+    {
+      "id": "sdl2",
+      "number": "S2",
+      "title": "Make quality a culture",
+      "subtitle": "Total quality management",
+      "description": "Learn the tools and improvement philosophies in the supplied SDL notes.",
+      "color": "#ffd773"
+    },
+    {
+      "id": "sdl3",
+      "number": "S3",
+      "title": "Solve quality problems",
+      "subtitle": "Tools & implementation",
+      "description": "Choose the right tool for organizing ideas, priorities and actions.",
+      "color": "#ffd773"
+    },
+    {
+      "id": "sdl4",
+      "number": "S4",
+      "title": "Make quality systematic",
+      "subtitle": "ISO, safety & environment",
+      "description": "Study the standards and versions described in your PDF.",
+      "color": "#ffd773"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "business",
+      "module": "m1",
+      "start": 1,
+      "end": 15,
+      "title": "Business, industry & the course map",
+      "idea": "Management begins with an activity that creates value. A business is an individual organization; an industry groups organizations with similar economic activities.",
+      "points": [
+        "The introductory pages preserve the course outcomes, syllabus, assessment and assignment information.",
+        "Primary industries obtain natural resources; secondary industries transform them; tertiary industries provide services.",
+        "Quaternary activities emphasize knowledge and information. Use the examples and classification tree in the source to distinguish the categories.",
+        "Efficiency concerns the resources used; effectiveness concerns whether the intended result is achieved. Read the opening case with both questions in mind."
+      ],
+      "memory": "A chain: obtain → transform → serve → know. This is a recall aid, not an additional classification.",
+      "question": "How do business and industry differ?",
+      "answer": "A business is an individual organization pursuing its activity; an industry is the larger group of businesses with related economic activities.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "functions",
+      "module": "m1",
+      "start": 16,
+      "end": 26,
+      "title": "Levels, skills & five functions",
+      "idea": "A manager coordinates people and resources. The five functions give the whole course its sequence.",
+      "points": [
+        "Levels: top, middle and lower management. Technical, human and conceptual skills have different relative importance at different levels.",
+        "Top managers need a broad conceptual view; lower managers need more technical expertise. Human skills matter throughout.",
+        "Planning selects objectives and actions. Organizing establishes roles and relationships. Staffing fills positions.",
+        "Leading influences people to contribute. Controlling measures performance and corrects deviations."
+      ],
+      "memory": "POSLC: Plan → Organize → Staff → Lead → Control. Imagine launching and running one organization.",
+      "question": "Which skill matters most for a newly appointed CEO, and why?",
+      "answer": "Conceptual skill: the CEO must understand the enterprise as a whole, connect its parts and set its direction. Human and technical skills still contribute.",
+      "trap": "A function describes the work of managing; a Mintzberg role describes a pattern of managerial behavior.",
+      "minutes": 25
+    },
+    {
+      "id": "systems",
+      "module": "m1",
+      "start": 27,
+      "end": 30,
+      "title": "The organization as an open system",
+      "idea": "Departments affect one another. An organization takes inputs from its environment, transforms them and returns outputs.",
+      "points": [
+        "Inputs include people, capital, information and resources.",
+        "Managerial functions coordinate the transformation process.",
+        "Outputs and feedback reconnect the organization with its environment.",
+        "Sub-systems must cooperate; optimizing one department alone can harm the whole."
+      ],
+      "memory": "Input → transformation → output → feedback. Draw the environment around the whole loop.",
+      "question": "Why is the systems approach useful?",
+      "answer": "It shows the interdependence of organizational parts and the connection between inputs, transformation, outputs, feedback and the external environment.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "fayol",
+      "module": "m1",
+      "start": 31,
+      "end": 52,
+      "title": "Fayol’s 14 principles + 5S",
+      "idea": "These principles help diagnose a management situation. Match each principle to a concrete clue in the case.",
+      "points": [
+        "Work and authority: division of labor; authority and responsibility; unity of command; unity of direction.",
+        "Fair treatment and organization: equity; order; discipline; initiative; fair remuneration.",
+        "Continuity and coordination: stability of tenure; scalar chain; subordination of individual interest to general interest; esprit de corps; centralization and decentralization.",
+        "Unity of command means one boss for an employee. Unity of direction means one head and one plan for activities with a common objective.",
+        "The order discussion includes 5S: sort, set in order, shine, standardize and sustain. Check the source table for the Japanese terms and its additional safety column.",
+        "Centralization concerns where decision authority is concentrated. Its degree depends on the situation."
+      ],
+      "memory": "Chunk the list into 4 + 5 + 5: work/authority, fair treatment, then continuity/coordination. Reconstruct each group before checking the source.",
+      "question": "Explain unity of command versus unity of direction.",
+      "answer": "Unity of command: one employee receives orders from one superior. Unity of direction: activities sharing one objective follow one plan under one head.",
+      "trap": "Do not confuse equal treatment with identical treatment regardless of relevant circumstances. Equity emphasizes fairness.",
+      "minutes": 28
+    },
+    {
+      "id": "roles",
+      "module": "m1",
+      "start": 53,
+      "end": 68,
+      "title": "Mintzberg’s ten managerial roles",
+      "idea": "Ask whether the manager is working through people, handling information or making a decision.",
+      "points": [
+        "Interpersonal: figurehead performs ceremonial duties; leader guides and motivates; liaison maintains contacts.",
+        "Informational: monitor collects information; disseminator shares it internally; spokesperson represents the organization externally.",
+        "Decisional: entrepreneur initiates change; disturbance handler handles unexpected problems; resource allocator assigns resources; negotiator bargains.",
+        "For a case, write both the role category and the specific role. The overview diagram is on page 55."
+      ],
+      "memory": "People: F–L–L. Information: M–D–S. Decisions: E–D–R–N. Remember “collect, share inside, speak outside” for the information roles.",
+      "question": "How do disseminator and spokesperson differ?",
+      "answer": "Both communicate information. A disseminator sends it within the organization; a spokesperson communicates to outsiders.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "csr",
+      "module": "m1",
+      "start": 69,
+      "end": 76,
+      "title": "Environment & corporate social responsibility",
+      "idea": "Organizations interact with society. CSR goes beyond the firm’s economic and legal obligations.",
+      "points": [
+        "Review the external-environment diagram on page 69; image content is retained in the source reader.",
+        "The classical view emphasizes economic performance; the socioeconomic view extends responsibility to society.",
+        "CSR drivers in the notes: employees and shareholders; brand equity; ethical marketing and social awareness; environmental consciousness; energy conservation and global warming; responsibility towards government.",
+        "Connect a CSR action to the stakeholder or social issue it addresses."
+      ],
+      "memory": "People, brand, ethics, environment, energy, government: six reasons a firm feels responsible.",
+      "question": "What distinguishes CSR from simply obeying the law?",
+      "answer": "CSR includes intentions and responsibilities beyond legal and economic obligations, directed toward social welfare and stakeholder concerns.",
+      "trap": "",
+      "minutes": 19
+    },
+    {
+      "id": "ethics",
+      "module": "m1",
+      "start": 77,
+      "end": 87,
+      "title": "Three ethical lenses",
+      "idea": "The same decision can be examined through consequences, rights and fairness.",
+      "points": [
+        "Utilitarian theory evaluates consequences: greatest good for the greatest number.",
+        "Rights theory protects basic rights such as conscience, speech and due process.",
+        "Justice theory emphasizes fairness, equity and impartiality.",
+        "Institutionalizing ethics means embedding ethical expectations in organizational practices. Read the source examples and measures, not just the three definitions."
+      ],
+      "memory": "U–R–J: Useful consequences, Rights respected, Justice applied.",
+      "question": "Which theory fits a decision based on impartial treatment?",
+      "answer": "The theory of justice, because it asks decision makers to act with fairness, equity and impartiality.",
+      "trap": "A favorable consequence alone does not establish that rights or fairness have been respected.",
+      "minutes": 25
+    },
+    {
+      "id": "trust",
+      "module": "m1",
+      "start": 88,
+      "end": 91,
+      "title": "Trust makes change possible",
+      "idea": "Change management helps people adapt when goals, processes or technologies change.",
+      "points": [
+        "Change requires strategies for implementing and controlling the transition.",
+        "Trust includes integrity, loyalty, caring and keeping promises.",
+        "The notes extend trust beyond individual relationships to an organizational culture that lasts when leaders change."
+      ],
+      "memory": "People change; a culture of trust should remain.",
+      "question": "Why should trust extend beyond a single leader?",
+      "answer": "Leaders may leave, while the organization continues. Trust embedded in organizational culture supports ongoing cooperation and change.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "international",
+      "module": "m1",
+      "start": 92,
+      "end": 103,
+      "title": "Culture & international management",
+      "idea": "The notes compare management practices across cultural settings. Treat these as the course’s comparative descriptions.",
+      "points": [
+        "Read the cultural dimensions and country examples in the source before using the comparison tables.",
+        "Japan: consensus, group harmony, long-term employment and extensive internal development feature in the notes.",
+        "USA: individual achievement, direct communication, faster individual decisions and performance emphasis feature in the comparison.",
+        "Korea: hierarchy, loyalty, seniority and respect for authority feature in the comparison.",
+        "The notes also discuss German, Austrian, Australian, Italian and British management. Compare the same basis across countries rather than writing disconnected lists."
+      ],
+      "memory": "Compare using the same columns: decisions, employment, communication, relationships, leadership, motivation, conflict, development, change, work-life, evaluation, CSR.",
+      "question": "Give three matched bases for comparing Japanese and American practices.",
+      "answer": "Compare decision-making, employment practices and performance evaluation: the notes contrast consensus/long-term/group emphasis with more individual/performance/mobile employment emphasis.",
+      "trap": "These are the PDF’s generalizations, not claims that every company or person in a country behaves identically.",
+      "minutes": 27
+    },
+    {
+      "id": "theoryz",
+      "module": "m1",
+      "start": 104,
+      "end": 108,
+      "title": "Theory Z: a blended approach",
+      "idea": "Ouchi’s Theory Z combines selected organizational practices rather than simply copying one country’s approach.",
+      "points": [
+        "Long-term employment; consensual participative decisions; individual responsibility.",
+        "Slow evaluation and promotion; informal control with explicit formal measures.",
+        "Moderately specialized careers and holistic concern including family.",
+        "Use the Japanese-type and American-type organization lists to understand the comparison."
+      ],
+      "memory": "Long employment, shared decisions, individual responsibility; slow promotion, blended controls, moderate careers, whole-person concern.",
+      "question": "What is the responsibility pattern in Theory Z?",
+      "answer": "Decision-making is consensual and participative, while responsibility is individual.",
+      "trap": "Theory Z is separate from McGregor’s Theory X and Theory Y.",
+      "minutes": 13
+    },
+    {
+      "id": "plans",
+      "module": "m2",
+      "start": 1,
+      "end": 18,
+      "title": "Planning & eight types of plans",
+      "idea": "A plan connects a desired future result to action. Different types of plans answer different questions.",
+      "points": [
+        "Purpose/mission/vision expresses the basic reason or direction; objectives state the ends; strategy gives the broad route.",
+        "Policy guides decisions; procedure gives a sequence; rule prescribes an action or prohibition without discretion.",
+        "Program combines activities and supporting arrangements; budget expresses expected results in numbers.",
+        "Planning asks what, why, where, when, who and how, and brings direction, coordination and a basis for control."
+      ],
+      "memory": "Why exist? → What result? → Which route? → Decision guide → Steps → Must/must not → Coordinated activities → Numbers.",
+      "question": "How do a policy, procedure and rule differ?",
+      "answer": "Policy guides judgment; procedure specifies a sequence of actions; rule prescribes an action or non-action without discretion.",
+      "trap": "A budget can express quantities such as labor hours, not only money.",
+      "minutes": 28
+    },
+    {
+      "id": "plantypes",
+      "module": "m2",
+      "start": 19,
+      "end": 25,
+      "title": "Classify a plan on several dimensions",
+      "idea": "One plan can have more than one label because each classification asks a different question.",
+      "points": [
+        "Content: strategic, tactical and operational.",
+        "Time: long-term versus short-term; specificity: directional versus specific.",
+        "Frequency: single-use versus standing plans.",
+        "Strategic plans concern broad enterprise direction; operational or tactical plans translate direction into implementation as described in the notes."
+      ],
+      "memory": "Content, time, precision, reuse: four questions to classify the same plan.",
+      "question": "How does a standing plan differ from a single-use plan?",
+      "answer": "A standing plan guides recurring activities; a single-use plan is prepared for a particular, nonrecurring situation.",
+      "trap": "",
+      "minutes": 17
+    },
+    {
+      "id": "planningsteps",
+      "module": "m2",
+      "start": 26,
+      "end": 26,
+      "title": "The eight-step planning process",
+      "idea": "Planning is a sequence from recognizing an opportunity to budgeting the selected course of action.",
+      "points": [
+        "1 Be aware of opportunities; 2 set objectives; 3 consider planning premises; 4 identify alternatives.",
+        "5 Compare alternatives against goals; 6 choose an alternative; 7 formulate supporting plans; 8 numberize the plans through budgets.",
+        "In an application answer, give each step an action in the same business case."
+      ],
+      "memory": "Opportunity → Objective → Premises → Alternatives → Compare → Choose → Support → Budget.",
+      "question": "What follows choosing an alternative?",
+      "answer": "Formulate supporting plans, then express the plans numerically through budgets.",
+      "trap": "",
+      "minutes": 5
+    },
+    {
+      "id": "objectives",
+      "module": "m2",
+      "start": 27,
+      "end": 31,
+      "title": "Objectives: hierarchy & multiplicity",
+      "idea": "Objectives give planning a target. They can exist at different levels and may need to be balanced.",
+      "points": [
+        "Enterprise objectives connect to departmental and individual objectives.",
+        "Top-down and bottom-up approaches relate objectives across the hierarchy.",
+        "Organizations usually pursue multiple objectives.",
+        "Quantitative objectives specify measurable amounts; qualitative objectives describe qualities or directions."
+      ],
+      "memory": "Enterprise → department → person. Ask “what evidence would show achievement?”",
+      "question": "Why is an objective hierarchy useful?",
+      "answer": "It connects individual and departmental contributions to enterprise objectives and supports coordination.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "mbo",
+      "module": "m2",
+      "start": 32,
+      "end": 45,
+      "title": "Management by objectives",
+      "idea": "MBO links agreed objectives with action, review and performance appraisal.",
+      "points": [
+        "Superior and subordinate work with connected objectives and expected results.",
+        "Objectives should be clear and verifiable; review the source table of vague versus verifiable objectives.",
+        "The source process links inputs, agreement, actions and final review/appraisal.",
+        "Benefits include clarity, participation and commitment; weaknesses include poor guidance, difficulty setting objectives, short-term emphasis and inflexibility as discussed in the notes."
+      ],
+      "memory": "Agree → act → review. The objective is the reference point throughout.",
+      "question": "Why is a verifiable objective stronger than “improve performance”?",
+      "answer": "It supplies an observable target against which achievement can be assessed; the vague phrase gives no clear basis for review.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "strategy",
+      "module": "m2",
+      "start": 46,
+      "end": 52,
+      "title": "Strategic planning & critical questions",
+      "idea": "Before choosing a competitive move, understand the business, its environment and its direction.",
+      "points": [
+        "Study the strategic-planning process diagram and corporate, business and functional levels.",
+        "Critical question analysis asks what the business is, where it is going, what environment it faces and what can achieve objectives.",
+        "Use the worked example to connect questions to a strategy instead of treating them as isolated definitions."
+      ],
+      "memory": "Who are we? Where are we going? What surrounds us? What can we do?",
+      "question": "Why does strategy need external analysis?",
+      "answer": "External conditions influence opportunities, threats and the feasibility of achieving the organization’s objectives.",
+      "trap": "",
+      "minutes": 17
+    },
+    {
+      "id": "blueocean",
+      "module": "m2",
+      "start": 53,
+      "end": 66,
+      "title": "Blue Ocean & the four actions",
+      "idea": "Blue Ocean strategy seeks new demand and value rather than relying only on existing competitive boundaries.",
+      "points": [
+        "The notes emphasize value innovation and creating new market space.",
+        "Four actions: eliminate, reduce, raise and create. Apply them to competitive factors.",
+        "Advantages concern new demand and differentiated value; challenges include risk, resource investment and execution.",
+        "Work through the examples, competitive-factor analysis and four-actions diagrams in the source."
+      ],
+      "memory": "ERRC: Eliminate the unnecessary, Reduce excess, Raise value, Create something missing.",
+      "question": "Name the four actions in the framework.",
+      "answer": "Eliminate, reduce, raise and create.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "swot",
+      "module": "m2",
+      "start": 67,
+      "end": 74,
+      "title": "SWOT: sort the evidence",
+      "idea": "The key is to classify by origin first and favorability second.",
+      "points": [
+        "Internal + helpful = strength. Internal + harmful = weakness.",
+        "External + helpful = opportunity. External + harmful = threat.",
+        "Use the actual case statements. A competitor’s action is external; the firm’s own capability is internal.",
+        "Practice the exercise before checking the source classification."
+      ],
+      "memory": "Inside = S/W. Outside = O/T. Then ask: helpful or harmful?",
+      "question": "Is an emerging market opportunity or strength?",
+      "answer": "Opportunity: it is a favorable condition outside the firm. A strength would be an internal capability to exploit it.",
+      "trap": "",
+      "minutes": 19
+    },
+    {
+      "id": "tows",
+      "module": "m2",
+      "start": 75,
+      "end": 84,
+      "title": "TOWS: turn diagnosis into action",
+      "idea": "SWOT classifies facts; TOWS combines them into strategic responses.",
+      "points": [
+        "SO: use strengths to exploit opportunities.",
+        "ST: use strengths to counter threats.",
+        "WO: address weaknesses by using opportunities.",
+        "WT: minimize weaknesses and threats; the notes connect this to defensive or retrenchment approaches.",
+        "Use the worked examples and the dynamic TOWS discussion to see that conditions can change."
+      ],
+      "memory": "S can exploit O or resist T; W needs help from O or protection from T.",
+      "question": "How is TOWS different from just listing SWOT?",
+      "answer": "TOWS combines internal and external factors to formulate SO, ST, WO and WT strategies.",
+      "trap": "",
+      "minutes": 23
+    },
+    {
+      "id": "bcg",
+      "module": "m2",
+      "start": 85,
+      "end": 101,
+      "title": "BCG portfolio matrix",
+      "idea": "Two axes classify a business: relative market share and market growth.",
+      "points": [
+        "High share + high growth = star; low share + high growth = question mark.",
+        "High share + low growth = cash cow; low share + low growth = dog.",
+        "Use the category to justify investment, cash generation or a selective/defensive response; read the source’s strategies and applications.",
+        "The product life cycle and portfolio steps provide context.",
+        "Limitations: two dimensions simplify a complex business, and interdependencies and other factors may be missed."
+      ],
+      "memory": "Stars grow and lead. Cows lead in mature markets. Question marks grow without leadership. Dogs have neither.",
+      "question": "How do a star and a cash cow differ?",
+      "answer": "Both have high relative market share. A star operates in a high-growth market; a cash cow operates in a low-growth market.",
+      "trap": "A shrinking market alone does not establish low relative market share. If a case omits an axis, state your assumption.",
+      "minutes": 28
+    },
+    {
+      "id": "porter",
+      "module": "m2",
+      "start": 102,
+      "end": 108,
+      "title": "Growth & Porter’s generic strategies",
+      "idea": "Competitive advantage and market scope are separate choices.",
+      "points": [
+        "Read the growth-strategy slide before the generic-strategy framework.",
+        "Cost leadership pursues a low-cost position; differentiation offers something distinctive valued by buyers.",
+        "Focus concentrates on a narrower segment and may use cost or differentiation.",
+        "The notes warn about being stuck in the middle when a firm fails to achieve a coherent advantage."
+      ],
+      "memory": "Two questions: cheaper or distinctive? Broad market or narrow segment?",
+      "question": "What makes a strategy a focus strategy?",
+      "answer": "Its restricted market scope: it concentrates on a specific segment rather than the entire market.",
+      "trap": "An inexpensive product does not automatically prove broad cost leadership; inspect the target segment.",
+      "minutes": 17
+    },
+    {
+      "id": "organizing",
+      "module": "m3",
+      "start": 1,
+      "end": 7,
+      "title": "From plan to organizational structure",
+      "idea": "Organizing establishes intentional roles so that people can contribute toward common objectives.",
+      "points": [
+        "Identify activities; organize/group activities; classify or assign authority; build relationships between authority and responsibility.",
+        "Structure clarifies who does what and who reports to whom.",
+        "For a case answer, identify the step and attach the supporting action or quoted line."
+      ],
+      "memory": "Activities → groups → authority → relationships.",
+      "question": "What problem does organizing solve?",
+      "answer": "It clarifies tasks, roles, authority and relationships so coordinated work can achieve organizational objectives.",
+      "trap": "",
+      "minutes": 17
+    },
+    {
+      "id": "formal",
+      "module": "m3",
+      "start": 8,
+      "end": 12,
+      "title": "Formal & informal organization",
+      "idea": "A formal structure is deliberately designed. Informal relationships develop through people’s interactions.",
+      "points": [
+        "Formal structure defines roles, reporting and authority.",
+        "Informal organization emerges through shared interests and relationships, illustrated by clubs and social groups.",
+        "The two coexist; an informal connection is not automatically an official reporting line.",
+        "Use the comparison table and overlaid organization diagrams."
+      ],
+      "memory": "Formal = designed. Informal = develops.",
+      "question": "Does an informal group replace the reporting hierarchy?",
+      "answer": "No. It develops alongside the formal structure through personal and social relationships.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "span",
+      "module": "m3",
+      "start": 13,
+      "end": 16,
+      "title": "Tall, flat & span of control",
+      "idea": "Span of control is the number of people one manager supervises effectively.",
+      "points": [
+        "A narrow span tends to create more management levels; a wide span tends to create fewer levels.",
+        "Factors include subordinate training, delegation, planning, rate of change, communication techniques, activity, organization type and level.",
+        "Wide spans can reduce bureaucracy but overload managers; narrow spans allow closer contact but add cost and levels.",
+        "Read the source comparison for the full advantages, limitations and influencing factors."
+      ],
+      "memory": "Wide → fewer layers. Narrow → more layers. Capacity decides what is workable.",
+      "question": "Why can training permit a wider span?",
+      "answer": "Trained subordinates need less continuous supervision, allowing the manager to supervise more people effectively.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "urwick",
+      "module": "m3",
+      "start": 17,
+      "end": 28,
+      "title": "Urwick’s ten organizing principles",
+      "idea": "A useful organization aligns goals, keeps costs sensible and makes authority clear.",
+      "points": [
+        "Unity of objectives; organizational efficiency; specialization; span of management; scalar chain.",
+        "Unity of command; delegation; parity of authority and responsibility; flexibility; functional definition.",
+        "Delegation gives people authority to achieve expected results; superiors retain responsibility for subordinate activities.",
+        "Functional definition makes expected results, activities and delegated authority explicit."
+      ],
+      "memory": "Goals, efficiency, expertise, span, chain; one boss, delegation, parity, flexibility, definition.",
+      "question": "Why must authority and responsibility be balanced?",
+      "answer": "A person needs sufficient authority to fulfill assigned responsibility; responsibility should correspond to the authority delegated.",
+      "trap": "Delegating work does not allow a superior to escape responsibility.",
+      "minutes": 27
+    },
+    {
+      "id": "departmentation",
+      "module": "m3",
+      "start": 29,
+      "end": 38,
+      "title": "Departmentation: numbers, time & function",
+      "idea": "Departmentation groups activities into manageable units. Choose the grouping that fits the work.",
+      "points": [
+        "Numbers: group people by headcount; the source discusses conditions and limitations.",
+        "Time: organize by shifts to cover different working periods.",
+        "Function: group by specialized functions such as production, marketing and finance.",
+        "Functional grouping builds specialization but can create coordination difficulties between departments.",
+        "For an exam answer: name the grouping, draw a labeled structure, then give merits and limitations."
+      ],
+      "memory": "How many? When? Which expertise? These identify numbers, time and function.",
+      "question": "Which structure groups specialists by their work function?",
+      "answer": "Functional departmentation.",
+      "trap": "",
+      "minutes": 23
+    },
+    {
+      "id": "departmentation2",
+      "module": "m3",
+      "start": 39,
+      "end": 43,
+      "title": "Geography, process, customer & product",
+      "idea": "The same organization can be grouped around locations, work stages, customers or outputs.",
+      "points": [
+        "Territory/geography suits geographically dispersed operations and local needs; assess duplication and coordination.",
+        "Process/equipment groups around stages or specialized equipment.",
+        "Customer grouping supports different customer needs; product/service grouping focuses responsibility on outputs.",
+        "Read each source organization chart and its stated advantages and limitations."
+      ],
+      "memory": "Where? How produced? For whom? Which output?",
+      "question": "Which grouping fits a nationwide field sales network?",
+      "answer": "Geographic/territorial departmentation is a defensible choice because work is distributed across regions and needs local coordination.",
+      "trap": "A case may justify a combination of approaches. Explain which level uses which grouping.",
+      "minutes": 13
+    },
+    {
+      "id": "matrix",
+      "module": "m3",
+      "start": 44,
+      "end": 46,
+      "title": "Matrix structure & identification practice",
+      "idea": "Matrix organization combines two dimensions, commonly function and project/product.",
+      "points": [
+        "Specialists retain functional connections while contributing to projects.",
+        "The structure permits expertise to be shared across projects but requires coordination of authority.",
+        "Study the diagram before trying the final identification exercise.",
+        "Distinguish a matrix’s intersecting dimensions from a simple product hierarchy."
+      ],
+      "memory": "Two dimensions cross: expertise × project.",
+      "question": "Why can matrix structures create authority difficulties?",
+      "answer": "People operate across functional and project relationships, which can create competing demands unless authority and coordination are clear.",
+      "trap": "",
+      "minutes": 9
+    },
+    {
+      "id": "hrm",
+      "module": "m4",
+      "start": 1,
+      "end": 9,
+      "title": "HRM, HRD & their integration",
+      "idea": "HRM manages people and employment arrangements; HRD develops people’s capabilities.",
+      "points": [
+        "HRM includes policies, administration and managing human resources; HRD emphasizes employee development.",
+        "Use the source comparison for scope, objectives, functions and emphasis.",
+        "Integration supports holistic development, organizational performance and aligned people practices.",
+        "The notes distinguish managerial and operational HRM functions."
+      ],
+      "memory": "Manage the employment system; develop the person. They support each other.",
+      "question": "Give one reason to integrate HRM and HRD.",
+      "answer": "People-management policies and development activities can reinforce each other, aligning employee growth with organizational needs.",
+      "trap": "",
+      "minutes": 21
+    },
+    {
+      "id": "jobanalysis",
+      "module": "m4",
+      "start": 10,
+      "end": 13,
+      "title": "Job analysis → description + specification",
+      "idea": "Analyze the job before looking for the person.",
+      "points": [
+        "Job analysis identifies duties, skills and knowledge required.",
+        "Job description describes the job: work, duties and responsibilities.",
+        "Job specification describes the person requirements: qualifications, knowledge, skills and other requirements.",
+        "When asked to draft both, use two clearly separate headings for the same position."
+      ],
+      "memory": "Description = the job. Specification = the person.",
+      "question": "Which document lists the qualifications a candidate needs?",
+      "answer": "Job specification; the job description states the work and responsibilities.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "recruitment",
+      "module": "m4",
+      "start": 14,
+      "end": 18,
+      "title": "Recruitment, selection & the ten-step process",
+      "idea": "Recruitment attracts candidates; selection chooses among them; placement assigns the chosen person.",
+      "points": [
+        "1 Hiring needs; 2 job analysis/description; 3 sourcing; 4 screening/shortlisting; 5 interviews.",
+        "6 Assessments/tests; 7 background checks; 8 decision; 9 offer/negotiation; 10 onboarding.",
+        "Each step should follow logically: understand the role, attract candidates, assess suitability and bring the chosen person into the organization."
+      ],
+      "memory": "Need → job → source → screen → interview → assess → check → decide → offer → onboard.",
+      "question": "What is the main difference between recruitment and selection?",
+      "answer": "Recruitment searches for and attracts prospective employees; selection evaluates and chooses suitable candidates.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "sources",
+      "module": "m4",
+      "start": 19,
+      "end": 21,
+      "title": "Recruitment approaches, challenges & sources",
+      "idea": "Source selection depends on the role and the organization’s talent needs.",
+      "points": [
+        "Approaches in the notes include internal, external, campus, executive search, contingent, remote, diversity/inclusion, referral, social media, full-cycle and digital recruitment.",
+        "Internal sources listed: promotion, transfer, demotion, retired employees, notice boards and job posting.",
+        "External sources listed: press advertisements, educational institutes, placement/employment agencies, unsolicited applicants and employee recommendations.",
+        "Review the challenges slide, including talent shortage, competition, and time/resource constraints.",
+        "In a justification answer, explain how each source fits the stated vacancy."
+      ],
+      "memory": "Internal = already connected to the workforce; external = attracting from outside. Follow the classifications in your source slide.",
+      "question": "Why might promotion be useful for an urgent team-leader vacancy?",
+      "answer": "The organization already knows the employee’s performance and experience, reducing familiarization needs and supporting internal progression.",
+      "trap": "Employee recommendations are listed under external sources in this PDF; avoid silently changing its classification.",
+      "minutes": 9
+    },
+    {
+      "id": "selection",
+      "module": "m4",
+      "start": 22,
+      "end": 31,
+      "title": "Selection: six stages & assessment methods",
+      "idea": "Selection gathers different kinds of evidence about suitability.",
+      "points": [
+        "Initial/preliminary interview → application form → reference checks → employment tests → interview → selection decision.",
+        "Read the test classifications and human-characteristic measures on pages 27–29.",
+        "The interview slide covers several formats; use the format’s purpose and features to distinguish them.",
+        "A decision should integrate evidence rather than rely on a single test or impression."
+      ],
+      "memory": "Interview briefly → application → references → tests → interview deeply → decide.",
+      "question": "List the six selection stages in source order.",
+      "answer": "Preliminary interview, application form, reference checks, employment tests, interview and selection decision.",
+      "trap": "The separate ten-step recruitment process places some activities differently. Use the sequence named by the question.",
+      "minutes": 23
+    },
+    {
+      "id": "training",
+      "module": "m4",
+      "start": 32,
+      "end": 40,
+      "title": "Training & development: process and trends",
+      "idea": "Training supports capability. Its value depends on identifying a need and checking whether learning helps.",
+      "points": [
+        "Needs assessment → design and development → delivery → evaluation → follow-up.",
+        "Six trends: digital learning, personalized programs, microlearning, gamification, DEI training and soft-skills development.",
+        "The source includes Microsoft, Google, Amazon, Starbucks and Walmart examples.",
+        "For “any three trends,” define each, connect it to a learning need and explain the expected benefit."
+      ],
+      "memory": "Need → design → deliver → evaluate → follow up. Short learning units = microlearning.",
+      "question": "Why is evaluation followed by follow-up?",
+      "answer": "Evaluation checks the training’s results; follow-up supports transfer and continued improvement after delivery.",
+      "trap": "",
+      "minutes": 21
+    },
+    {
+      "id": "trainingmethods",
+      "module": "m4",
+      "start": 41,
+      "end": 44,
+      "title": "Training methods, induction & sensitivity",
+      "idea": "Choose a method that fits how the skill should be learned.",
+      "points": [
+        "On the job: apprenticeship programs, coaching, internship training and job rotation.",
+        "Off the job: conferences, films, case study, computer modelling, vestibule training and programmed instruction.",
+        "Read the source’s induction and orientation definitions and comparison.",
+        "Sensitivity training develops awareness of interpersonal behavior and its effect on others."
+      ],
+      "memory": "On = learning in work. Off = learning away from normal work. Use the source labels for induction/orientation.",
+      "question": "Name two on-the-job and two off-the-job methods.",
+      "answer": "On the job: coaching and job rotation. Off the job: case studies and vestibule training.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "staffing",
+      "module": "m4",
+      "start": 45,
+      "end": 46,
+      "title": "Systems approach to staffing",
+      "idea": "Staffing links enterprise plans to available talent and future capability.",
+      "points": [
+        "Enterprise plans → organization plans → number and kinds of managers required.",
+        "Compare requirements with the manager inventory to analyze present and future needs.",
+        "Use internal/external sources → recruitment, selection, placement, promotion or separation.",
+        "Appraisal, career strategy, training and development connect to leading and controlling.",
+        "The external environment surrounds the model; personnel policies and reward systems form part of the internal environment. Include feedback relationships."
+      ],
+      "memory": "Plans → needs versus inventory → sources → staffing actions → develop/appraise → lead/control.",
+      "question": "Why is manager inventory included in staffing?",
+      "answer": "It shows existing managerial resources so the organization can compare supply with present and future requirements.",
+      "trap": "The source diagram is image-based. Open page 46 to practice the full labeled sketch.",
+      "minutes": 7
+    },
+    {
+      "id": "managerdevelopment",
+      "module": "m4",
+      "start": 47,
+      "end": 48,
+      "title": "Developing excellent managers",
+      "idea": "Manager development requires organizational support, useful information and continued learning.",
+      "points": [
+        "Willingness to learn; accelerated management development; planning for innovation; effective measurement and rewards.",
+        "Tailored information; research and development in tools and techniques; managerial inventories; strong intellectual leadership.",
+        "Connect each consideration to how it improves managerial capability."
+      ],
+      "memory": "Learn, accelerate, innovate, reward; inform, research, inventory, lead.",
+      "question": "Why tailor information for developing managers?",
+      "answer": "Managers need information suited to their roles and development needs to learn and make effective decisions.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "leadership",
+      "module": "m5",
+      "start": 1,
+      "end": 8,
+      "title": "Leadership: influence toward contribution",
+      "idea": "Leadership influences people to contribute willingly and enthusiastically to group goals.",
+      "points": [
+        "Read the distinction between managing and leading.",
+        "Review the ingredients of leadership and the qualities of an effective leader in the source diagrams.",
+        "Authority alone does not explain willingness; influence connects goals with people’s motives and situation."
+      ],
+      "memory": "Lead = influence people toward shared goals.",
+      "question": "What distinguishes leadership from merely issuing orders?",
+      "answer": "Leadership seeks willing and enthusiastic contribution through influence, not only formal instruction.",
+      "trap": "",
+      "minutes": 19
+    },
+    {
+      "id": "maslow",
+      "module": "m5",
+      "start": 9,
+      "end": 14,
+      "title": "Motivation & Maslow’s needs",
+      "idea": "A motive energizes action; motivation is the drive to satisfy a need; a motivator is a technique; satisfaction is the resulting state.",
+      "points": [
+        "Maslow: physiological → safety → social → esteem → self-actualization.",
+        "Physiological: basic living needs. Safety: security. Social: belonging.",
+        "Esteem: respect and recognition. Self-actualization: realizing potential.",
+        "In a case, identify the unmet need using the employee’s specific statement. Multiple unmet needs may appear."
+      ],
+      "memory": "Body → safety → belonging → respect → becoming.",
+      "question": "An employee feels excluded despite adequate salary and safety. Which need is evident?",
+      "answer": "Social/belonging needs are unmet. Connect the answer to exclusion and lack of group acceptance.",
+      "trap": "Growth, recognition and belonging are different clues. If asked for the highest unmet level, inspect all the stated evidence.",
+      "minutes": 15
+    },
+    {
+      "id": "herzberg",
+      "module": "m5",
+      "start": 15,
+      "end": 18,
+      "title": "Herzberg: remove dissatisfaction, then motivate",
+      "idea": "Hygiene factors and motivators act differently. Removing dissatisfaction does not automatically create strong satisfaction.",
+      "points": [
+        "Hygiene factors concern job context: policy, supervision, conditions, interpersonal relations, pay and security as shown in the source.",
+        "Motivators concern job content: achievement, recognition, responsibility, advancement and the work itself.",
+        "Analyze complaints about conditions separately from the absence of meaningful, satisfying work.",
+        "Read the Maslow–Herzberg comparison to understand overlapping needs without treating the theories as identical."
+      ],
+      "memory": "Hygiene protects the floor. Motivators raise the ceiling.",
+      "question": "Why can good salary coexist with low motivation?",
+      "answer": "Salary can address a hygiene issue while achievement, recognition, responsibility or meaningful work remain missing.",
+      "trap": "Do not say that removing every hygiene problem automatically produces motivation.",
+      "minutes": 11
+    },
+    {
+      "id": "xy",
+      "module": "m5",
+      "start": 19,
+      "end": 23,
+      "title": "McGregor’s Theory X & Theory Y",
+      "idea": "These are contrasting managerial assumptions about workers and work.",
+      "points": [
+        "X assumes work is disliked, direction/control is needed and responsibility may be avoided.",
+        "Y assumes work can be natural, people can exercise self-direction and seek responsibility under suitable conditions.",
+        "Management practices should be linked to the assumptions and the situation.",
+        "Use the source comparison for motivation, control and responsibility."
+      ],
+      "memory": "X = external control. Y = your own direction, with commitment and conditions.",
+      "question": "Which assumptions support giving a capable team greater autonomy?",
+      "answer": "Theory Y: people can exercise self-direction and accept responsibility when committed to objectives.",
+      "trap": "These are managerial assumptions; do not permanently label every employee as an X or Y person.",
+      "minutes": 13
+    },
+    {
+      "id": "motivationtechniques",
+      "module": "m5",
+      "start": 24,
+      "end": 27,
+      "title": "Motivational techniques",
+      "idea": "Techniques are practical ways of influencing effort, distinct from theories explaining motivation.",
+      "points": [
+        "Compare positive and negative techniques in the notes.",
+        "Study the special motivational techniques, including money, participation and quality of working life.",
+        "For an application answer, connect the technique to the need or behavior it is intended to address."
+      ],
+      "memory": "Theory explains why; technique describes what the manager does.",
+      "question": "How does a motivation theory differ from a technique?",
+      "answer": "A theory explains motivation; a technique is an action or method used to influence it.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "authoritystyles",
+      "module": "m5",
+      "start": 28,
+      "end": 40,
+      "title": "Autocratic, democratic & free-rein styles",
+      "idea": "The central question is where decision authority and freedom lie.",
+      "points": [
+        "Autocratic: leader retains decision authority and directs activity.",
+        "Democratic/participative: members contribute to decisions.",
+        "Free-rein/delegative: employees have substantial freedom within the arrangement.",
+        "Learn each style’s strengths, limitations and suitable conditions from the source.",
+        "Style choice is influenced by the leader, subordinates and situation; justify the fit to the case."
+      ],
+      "memory": "Leader decides → group participates → team has freedom.",
+      "question": "Why might a creative, capable team benefit from participation?",
+      "answer": "It allows members’ expertise and ideas to influence decisions and supports involvement; justify it using the team’s stated needs.",
+      "trap": "No style is automatically best for every team and situation.",
+      "minutes": 28
+    },
+    {
+      "id": "likert",
+      "module": "m5",
+      "start": 41,
+      "end": 46,
+      "title": "Likert’s four systems",
+      "idea": "Likert’s systems form a progression in trust and participation.",
+      "points": [
+        "1 Exploitative-authoritative: low trust, centralized decisions and coercive direction.",
+        "2 Benevolent-authoritative: paternal confidence and rewards, while control stays largely at the top.",
+        "3 Consultative: managers seek input but retain important decisions.",
+        "4 Participative: substantial trust, group participation and shared involvement.",
+        "Identify systems from evidence about trust, motivation, communication and decisions."
+      ],
+      "memory": "E–B–C–P: Exploit → Benevolent → Consult → Participate. Increasing trust is the spine.",
+      "question": "What separates consultative from participative management?",
+      "answer": "Consultative management seeks input while retaining major decisions; participative management involves groups more fully in decision-making.",
+      "trap": "",
+      "minutes": 15
+    },
+    {
+      "id": "grid",
+      "module": "m5",
+      "start": 47,
+      "end": 56,
+      "title": "The managerial grid",
+      "idea": "Two concerns vary independently: people and production.",
+      "points": [
+        "1,1 impoverished: low concern for both.",
+        "1,9 country club: high people, low production.",
+        "9,1 task/authority-compliance: high production, low people.",
+        "5,5 middle-of-the-road: moderate concern for both; 9,9 team: high concern for both.",
+        "Practice placing each style on the axes and identifying it from cases."
+      ],
+      "memory": "First coordinate = production. Second = people. 9,9 is high on both.",
+      "question": "What does 1,9 represent?",
+      "answer": "Country-club management: low concern for production and high concern for people.",
+      "trap": "Read the axis labels before assigning coordinates.",
+      "minutes": 23
+    },
+    {
+      "id": "continuum",
+      "module": "m5",
+      "start": 57,
+      "end": 58,
+      "title": "Leadership as a continuum",
+      "idea": "Leadership behavior can vary between manager-centered authority and greater subordinate freedom.",
+      "points": [
+        "The continuum connects the manager’s use of authority with the area of freedom for subordinates.",
+        "Read the exact stages on the source diagram.",
+        "Explain a shift in style by saying how participation and decision freedom change."
+      ],
+      "memory": "As subordinate freedom expands, unilateral manager control contracts.",
+      "question": "What changes as we move along the leadership continuum?",
+      "answer": "The balance between the manager’s authority and the subordinates’ freedom in decision-making.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "groups",
+      "module": "m5",
+      "start": 59,
+      "end": 67,
+      "title": "Committees, groups & four development stages",
+      "idea": "A committee has an assigned matter; groups involve interdependent people working toward common goals.",
+      "points": [
+        "Forming: getting acquainted. Storming: conflict and clarification of objectives. Norming: agreed rules. Performing: task execution.",
+        "Read committee functions/formality, reasons for use and disadvantages.",
+        "Reasons include group judgment, representation and coordination; costs and delays are among the limitations.",
+        "Groups can influence behavior, attitudes, values, motivation and relationships."
+      ],
+      "memory": "Meet → clash → agree → do. The notes use four stages.",
+      "question": "What distinguishes norming from performing?",
+      "answer": "Norming establishes agreed behavior and rules; performing focuses on carrying out the task.",
+      "trap": "Do not add an extra development stage to a question asking for the four stages in these notes.",
+      "minutes": 21
+    },
+    {
+      "id": "teams",
+      "module": "m5",
+      "start": 68,
+      "end": 72,
+      "title": "Teams & team building",
+      "idea": "Teams need a meaningful purpose and coordinated contributions.",
+      "points": [
+        "Read the team definition and the distinctions from groups and committees.",
+        "The source discusses recommendations, decision-making and operational roles.",
+        "Team building requires a worthwhile purpose, suitable skills, rules of behavior and commitment.",
+        "Study the team types in the final slide of this range."
+      ],
+      "memory": "Purpose + people + rules + coordinated action.",
+      "question": "Why do rules of group behavior matter in a team?",
+      "answer": "They clarify how members work together and support coordinated effort toward the team’s purpose.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "communication",
+      "module": "m5",
+      "start": 73,
+      "end": 87,
+      "title": "Communication: process & nine types",
+      "idea": "Communication links people and integrates managerial functions.",
+      "points": [
+        "Sender forms a thought and encodes a message; it is transmitted, received, decoded and understood; feedback closes the loop. Noise can interfere.",
+        "Formal and informal; downward and upward; horizontal/crosswise and diagonal; written, oral and non-verbal.",
+        "Each classification describes a different aspect: official status, direction or medium.",
+        "Compare advantages and limitations of written and oral communication using the source."
+      ],
+      "memory": "Think → encode → transmit → receive → decode → understand → feedback; noise can interrupt.",
+      "question": "How does diagonal communication differ from horizontal?",
+      "answer": "Horizontal communication links similar levels; diagonal communication links different levels without a direct reporting relationship.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "barriers",
+      "module": "m5",
+      "start": 88,
+      "end": 92,
+      "title": "Communication barriers & remedies",
+      "idea": "A message can be sent without being understood. Diagnose the obstacle and match a remedy.",
+      "points": [
+        "Source barriers include lack of planning, unclear assumptions, semantic distortion, poor expression, loss/retention issues and poor listening.",
+        "Also review perception, attitudes, status/power, information overload and other barriers listed in the pages.",
+        "Remedies include clarity, audience awareness, consultation, suitable language and follow-up/feedback.",
+        "Read listening guidance and the separate written-communication checklist."
+      ],
+      "memory": "Barrier → mechanism → remedy. Explain how the remedy fixes this barrier.",
+      "question": "How can feedback help with unclear understanding?",
+      "answer": "It reveals how the receiver interpreted the message so the sender can clarify or correct misunderstanding.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "controlprocess",
+      "module": "m5",
+      "start": 93,
+      "end": 99,
+      "title": "Controlling: the eight-step loop",
+      "idea": "Control compares what happened with what was planned, then corrects deviations.",
+      "points": [
+        "Standards → actual performance → measure actual performance → compare with standards.",
+        "Identify deviations → analyze causes → program corrective action → implement corrections.",
+        "Standards in the notes: physical, technical, monetary, managerial and time.",
+        "Use one consistent example across the entire diagram; distinguish a deviation from its cause."
+      ],
+      "memory": "Set → perform → measure → compare → identify → analyze → plan correction → implement.",
+      "question": "Why analyze causes before implementing corrections?",
+      "answer": "The same observed deviation can have different causes; correction should address the actual cause rather than only the symptom.",
+      "trap": "",
+      "minutes": 17
+    },
+    {
+      "id": "controltypes",
+      "module": "m5",
+      "start": 100,
+      "end": 101,
+      "title": "Before, during & after: three controls",
+      "idea": "The timing of a control helps identify it in a case.",
+      "points": [
+        "Feedforward anticipates problems before they arise.",
+        "Concurrent control monitors ongoing transformation of inputs into outputs.",
+        "Feedback control uses results and reactions after the output.",
+        "Quote the time/action clue and explain why it fits the selected control."
+      ],
+      "memory": "Before = feedforward. During = concurrent. After = feedback.",
+      "question": "Monitoring a process while it runs is which type?",
+      "answer": "Concurrent control: it gives immediate information about ongoing operations.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "budgets",
+      "module": "m5",
+      "start": 102,
+      "end": 110,
+      "title": "Exam-included self-study: budgetary control",
+      "idea": "These source pages are explicitly marked as included for the end-semester exam.",
+      "points": [
+        "Budgetary control compares actual results with budgeted results and supports corrective action.",
+        "A budget is a numerical plan; categories include financial, operating and non-monetary budgets.",
+        "Read the cash, capital and balance-sheet-related financial budgets and the operating budget categories.",
+        "Non-monetary budgets can state labor, space or output quantities.",
+        "Dangers include over-budgeting, overriding enterprise goals and inflexibility; read all source explanations."
+      ],
+      "memory": "Budget = plan in numbers. Budgetary control = compare reality with those numbers.",
+      "question": "Can a budget be non-financial?",
+      "answer": "Yes. The notes include non-monetary budgets expressed in quantities such as labor or other resources.",
+      "trap": "",
+      "minutes": 21
+    },
+    {
+      "id": "flexiblebudget",
+      "module": "m5",
+      "start": 111,
+      "end": 114,
+      "title": "Variable & zero-based budgets",
+      "idea": "Different budgeting approaches handle changing activity and the justification of expenditure.",
+      "points": [
+        "Variable/flexible budgets vary with output or another activity measure.",
+        "A fixed budget does not adjust in the same way.",
+        "Zero-based budgeting requires expenditure to be examined and justified rather than simply carrying forward the past.",
+        "Study the source’s explanations and cost behavior diagrams."
+      ],
+      "memory": "Flexible asks “what if volume changes?” Zero-based asks “why spend this at all?”",
+      "question": "Why is a variable budget useful when output changes?",
+      "answer": "It adjusts budgeted amounts to the activity level, making comparison more meaningful.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "nonbudget",
+      "module": "m5",
+      "start": 115,
+      "end": 120,
+      "title": "Non-budgetary controls & project networks",
+      "idea": "Not all useful control information is a budget.",
+      "points": [
+        "Statistical data; special reports and analysis; operational audit; other devices listed on the source overview.",
+        "Operational audit independently appraises operations and their effectiveness.",
+        "PERT and CPM support project planning and control; Gantt charts show time relationships.",
+        "Review the time-event network material and source diagrams rather than substituting a financial budget."
+      ],
+      "memory": "Data tells, reports explain, audit appraises, networks schedule.",
+      "question": "How does a Gantt chart support control?",
+      "answer": "It shows activities or events against time, helping managers compare progress with the schedule.",
+      "trap": "",
+      "minutes": 15
+    },
+    {
+      "id": "overall",
+      "module": "m5",
+      "start": 121,
+      "end": 136,
+      "title": "Overall control: summaries, profit & ROI",
+      "idea": "Overall control assesses the enterprise or a major unit rather than only isolated operations.",
+      "points": [
+        "Budget summaries consolidate individual budgets and show overall performance.",
+        "Profit-and-loss control compares revenue and expenses and gives divisional managers responsibility for results.",
+        "Read its limitations, including accounting effort and overhead allocation issues.",
+        "ROI relates profit to investment; the source diagram links return to its influencing factors.",
+        "Study ROI advantages and limitations, including the information and valuation difficulties in the notes."
+      ],
+      "memory": "Whole-enterprise lens: combined budgets → profit/loss → return on invested resources.",
+      "question": "What does ROI add beyond simply knowing profit?",
+      "answer": "It relates profit to the investment used to produce it, supporting comparison of how effectively invested resources are used.",
+      "trap": "",
+      "minutes": 28
+    },
+    {
+      "id": "preventive",
+      "module": "m5",
+      "start": 137,
+      "end": 143,
+      "title": "Direct & preventive control",
+      "idea": "Direct control investigates deviations; preventive control improves managers so fewer avoidable deviations arise.",
+      "points": [
+        "Direct control traces causes and responsibility for unsatisfactory results.",
+        "Read the seven causes/assumptions discussion on negative deviations.",
+        "Preventive control develops knowledge and application of managerial principles, functions and techniques.",
+        "Study the three assumptions and the advantages: psychological benefit, accuracy, self-control and lighter managerial burden."
+      ],
+      "memory": "Direct: trace the error. Preventive: improve the capability that avoids it.",
+      "question": "How is preventive control connected to manager development?",
+      "answer": "Improved managerial knowledge and capability reduce errors that would otherwise require corrective action.",
+      "trap": "Do not collapse this managerial concept into merely another label for feedforward control.",
+      "minutes": 17
+    },
+    {
+      "id": "quality",
+      "module": "sdl1",
+      "start": 1,
+      "end": 3,
+      "title": "Quality starts with the customer",
+      "idea": "Quality concerns meeting requirements and needs, not simply making something expensive or durable.",
+      "points": [
+        "Juran emphasizes features that meet customer needs and freedom from deficiencies.",
+        "Products include goods, software and services; customers may be external or internal.",
+        "Concepts include fitness for purpose, conformance to requirements and grade.",
+        "Quality of design translates customer needs into the product’s intended features and specifications."
+      ],
+      "memory": "Need → specification. A durable fuse that fails to protect is not good quality for its purpose.",
+      "question": "Why is durability alone an inadequate definition of quality?",
+      "answer": "A product must serve its intended purpose and requirements; the source’s fuse example shows that lasting longer can be undesirable.",
+      "trap": "",
+      "minutes": 9
+    },
+    {
+      "id": "qualitydimensions",
+      "module": "sdl1",
+      "start": 4,
+      "end": 5,
+      "title": "Design, conformance & performance",
+      "idea": "A good idea, correct manufacture and satisfactory use are different links in the quality chain.",
+      "points": [
+        "Design: specify the right product for the need.",
+        "Conformance: the actual output follows the design and other requirements; process variability and inspection matter.",
+        "Performance: how the product functions in customer use, depending on both design and conformance.",
+        "Review the listed factors affecting conformance and the service-sector example."
+      ],
+      "memory": "Design = intended. Conformance = made as intended. Performance = works in use.",
+      "question": "Can perfect conformance compensate for a poor design?",
+      "answer": "No. A product can match its design precisely yet fail to satisfy the customer if the design itself is unsuitable.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "qc",
+      "module": "sdl1",
+      "start": 6,
+      "end": 7,
+      "title": "Quality control & specifications",
+      "idea": "QC measures actual performance, compares it with a standard and acts on deviation.",
+      "points": [
+        "Quality belongs across marketing, R&D, design, planning, purchasing, production, inspection and retail/service.",
+        "Specifications can be standard, customer or company specifications.",
+        "QC seeks acceptable output, fewer defects and losses, conformity, loyal customers and sustained value.",
+        "Key characteristics include technological, psychological, time-oriented, contractual and ethical dimensions.",
+        "Inspection finds defects; QC aims to regulate quality and reduce variation in future output."
+      ],
+      "memory": "Measure → compare → correct. Inspection detects; QC feeds improvement.",
+      "question": "Give three objectives of quality control.",
+      "answer": "Improve customer acceptance, reduce losses from defects and ensure conformity to established standards; connect them to customer satisfaction.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "stakeholders",
+      "module": "sdl1",
+      "start": 8,
+      "end": 8,
+      "title": "Stakeholders in quality",
+      "idea": "People affected by an organization can influence its quality decisions and their success.",
+      "points": [
+        "Stakeholders include investors, consumers, employees and other affected or influential groups.",
+        "Roles include plan/policy development, support for improvement initiatives and performance monitoring.",
+        "Quality assurance begins by considering confidence in product performance under actual conditions."
+      ],
+      "memory": "Help plan → support improvement → monitor progress.",
+      "question": "Why involve stakeholders early in a quality initiative?",
+      "answer": "Their interests and support affect implementation; involvement helps identify concerns and align the initiative with relevant needs.",
+      "trap": "",
+      "minutes": 5
+    },
+    {
+      "id": "qa",
+      "module": "sdl1",
+      "start": 9,
+      "end": 12,
+      "title": "Quality assurance, audit & survey",
+      "idea": "Assurance builds confidence that quality requirements will be met. Audits and surveys examine whether arrangements support that confidence.",
+      "points": [
+        "Read the detailed quality-assurance explanation before the audit process.",
+        "Quality audit examines quality activities and their effectiveness systematically.",
+        "The notes discuss audit planning, evidence, reporting and follow-up; preserve the full procedure in the source.",
+        "Quality survey evaluates a supplier’s quality capabilities and arrangements."
+      ],
+      "memory": "Assurance = confidence supported by evidence. Audit = examine. Survey = assess capability.",
+      "question": "How is assurance broader than inspecting the finished product?",
+      "answer": "It concerns confidence in the arrangements and activities that support quality, not just sorting finished output.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "productaudit",
+      "module": "sdl1",
+      "start": 13,
+      "end": 15,
+      "title": "Product audits & economic effects",
+      "idea": "Product audits independently evaluate quality and help reveal defects missed earlier.",
+      "points": [
+        "Read the defect classifications, demerit weighting and example table.",
+        "Inspection effectiveness example: 40 previously detected defects out of 50 total detected defects = 80%.",
+        "Compare against a stable base period or market quality as described.",
+        "Quality affects costs through fewer deficiencies and income through valued product features."
+      ],
+      "memory": "Fewer deficiencies → lower waste. Better features → greater customer value.",
+      "question": "In the source example, what is inspection effectiveness if inspection found 40 defects and audit found 10 more?",
+      "answer": "40 ÷ (40 + 10) × 100 = 80%.",
+      "trap": "Do not divide by only the additional audit defects.",
+      "minutes": 9
+    },
+    {
+      "id": "qualityreview",
+      "module": "sdl1",
+      "start": 16,
+      "end": 19,
+      "title": "Quality foundations: summary & worked answers",
+      "idea": "Use the unit’s own summary, keywords and SAQ answers to test whether the distinctions have become clear.",
+      "points": [
+        "Review quality, QC, assurance, audit and the effects on cost and income.",
+        "Work through the supplied self-assessment answers.",
+        "Explain the complete chain from customer need through product design, conformance, use and feedback."
+      ],
+      "memory": "Need → design → make → check → use → learn.",
+      "question": "How can quality simultaneously reduce costs and increase income?",
+      "answer": "Freedom from deficiencies reduces waste, rework and user losses; useful features improve satisfaction, sales and market position.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "tqm",
+      "module": "sdl2",
+      "start": 1,
+      "end": 5,
+      "title": "TQM, objectives & Joiner’s triangle",
+      "idea": "TQM makes quality a shared, continuing organizational commitment.",
+      "points": [
+        "Study the definition, principle of objectives and reasons for popularity.",
+        "Three axioms: commitment, scientific knowledge and involvement; represented by Joiner’s triangle.",
+        "Management commitment requires action and resources, not slogans alone.",
+        "Scientific methods support fact-based decisions; involvement brings people, teams and suppliers into improvement.",
+        "Benefits discussed include cost reduction, a supportive environment and broader measures of success."
+      ],
+      "memory": "CSI: Commitment + Scientific knowledge + Involvement. All three sides must support the culture.",
+      "question": "State and explain the three TQM axioms.",
+      "answer": "Commitment sustains improvement; scientific knowledge supplies appropriate tools and evidence; involvement engages everyone in the change.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "basictools",
+      "module": "sdl2",
+      "start": 6,
+      "end": 9,
+      "title": "The seven basic tools in your PDF",
+      "idea": "Choose a tool by the question you need to answer.",
+      "points": [
+        "Cause-and-effect/fishbone: possible causes. Flowchart: process steps. Pareto: priorities among causes.",
+        "Run chart: change over time. Control chart: process behavior with control limits.",
+        "Correlation chart: relationship between factors. Histogram: frequency distribution.",
+        "The source illustrates mean, standard deviation and UCL/LCL calculations and a histogram example.",
+        "Keep this exact seven-tool list: other textbooks may use a different list."
+      ],
+      "memory": "Causes, steps, priorities, time, limits, relationships, distribution.",
+      "question": "Which tool helps prioritize the largest causes of defects?",
+      "answer": "A Pareto chart, which arranges causes by magnitude so the most significant contributors can be addressed first.",
+      "trap": "The PDF’s list includes flowchart and run chart. Do not substitute an external “standard seven” list.",
+      "minutes": 11
+    },
+    {
+      "id": "kaizen",
+      "module": "sdl2",
+      "start": 10,
+      "end": 11,
+      "title": "Kaizen, Kanban, circles & maintenance",
+      "idea": "Small continuing improvements need people, flow and reliable equipment.",
+      "points": [
+        "Read the Kaizen introduction at the end of page 9 with the tools lesson.",
+        "Total quality control integrates quality across organizational groups.",
+        "Kanban supports just-in-time flow; quality circles bring small groups into improvement.",
+        "The source calls TPM “Total Predictive Maintenance”; use its discussion and terminology for this course."
+      ],
+      "memory": "Improve continually; pull materials; discuss locally; maintain equipment.",
+      "question": "How do quality circles support improvement?",
+      "answer": "Small groups use participation and shared experience to identify and solve quality-related problems.",
+      "trap": "Retain the terminology used in the supplied PDF; do not silently replace its TPM expansion.",
+      "minutes": 7
+    },
+    {
+      "id": "deming",
+      "module": "sdl2",
+      "start": 12,
+      "end": 15,
+      "title": "Deming’s 14 points, seven sins & PDCA",
+      "idea": "Deming connects quality to improving the system and management’s behavior.",
+      "points": [
+        "14 points, grouped for recall: constancy and new philosophy; prevention rather than mass inspection; avoid price-only purchasing; continually improve.",
+        "Train, lead, remove fear and break barriers; eliminate slogans and numerical targets/work standards.",
+        "The PDF’s list continues with ending annual merit reviews, education/self-improvement and permanent top-management commitment.",
+        "Read all seven deadly sins on pages 14–15; they include lack of constancy, short-term emphasis and management practices that undermine improvement.",
+        "PDCA: plan, do, check, act. Use the cycle as a repeating learning loop."
+      ],
+      "memory": "Direction → better system → better leadership → remove obstacles → learn and commit. PDCA: plan a change, try it, check it, act on learning.",
+      "question": "What is the order of the PDCA cycle?",
+      "answer": "Plan → Do → Check → Act; repeat the cycle for continued improvement.",
+      "trap": "Use the 14-point wording in this PDF; do not merge it with Crosby’s different 14 points.",
+      "minutes": 11
+    },
+    {
+      "id": "juran",
+      "module": "sdl2",
+      "start": 16,
+      "end": 19,
+      "title": "Juran’s trilogy & breakthrough",
+      "idea": "Juran separates setting up quality, maintaining it and raising it to a better level.",
+      "points": [
+        "Quality planning identifies customers/needs, translates them into requirements and develops product/process capability.",
+        "Quality control detects and corrects adverse change.",
+        "Quality improvement raises performance beyond the previous level.",
+        "Read the breakthrough sequence, managerial responsibilities and project-by-project approach."
+      ],
+      "memory": "Plan the level → control the level → improve the level.",
+      "question": "Why is improvement different from control?",
+      "answer": "Control prevents or corrects deterioration from the set level; improvement establishes a higher level of quality.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "crosby",
+      "module": "sdl2",
+      "start": 20,
+      "end": 23,
+      "title": "Crosby: four absolutes & zero defects",
+      "idea": "Crosby makes requirements and the cost of doing things wrong central to quality management.",
+      "points": [
+        "Quality means conformance to requirements; the system is prevention; the measurement is price of non-conformance; the performance standard is zero defects.",
+        "Zero defects is a continuing improvement objective; the notes warn that slogans without a sound system or unrealistic short-term pressure can fail.",
+        "Read Crosby’s separate 14-point improvement program on pages 21–22.",
+        "Review the steps for implementing a zero-defect program on page 23."
+      ],
+      "memory": "Conformance → prevention → zero defects → cost of non-conformance. Use these four labels to reconstruct the explanation.",
+      "question": "What is the price of non-conformance?",
+      "answer": "The costs of doing things wrong, such as rejects, rework and warranty costs.",
+      "trap": "“Quality is free” does not mean improvement requires no effort; it concerns the savings from avoiding poor quality.",
+      "minutes": 11
+    },
+    {
+      "id": "pokayoke",
+      "module": "sdl2",
+      "start": 24,
+      "end": 26,
+      "title": "Poka-yoke & concurrent engineering",
+      "idea": "Quality improves when errors are prevented and product decisions are coordinated early.",
+      "points": [
+        "Poka-yoke concerns mistake-proofing: preventing mistakes or making them evident.",
+        "Concurrent engineering coordinates product and related process considerations rather than leaving everything to a late sequence.",
+        "Read the unit summary and keywords, then answer its SAQs without looking."
+      ],
+      "memory": "Poka-yoke: stop the mistake. Concurrent: work together early.",
+      "question": "How does poka-yoke support quality?",
+      "answer": "It helps prevent errors or detect them promptly, reducing the chance that mistakes become defects.",
+      "trap": "",
+      "minutes": 9
+    },
+    {
+      "id": "tqmhouse",
+      "module": "sdl3",
+      "start": 1,
+      "end": 5,
+      "title": "The house of TQM: eight elements",
+      "idea": "The PDF gives a ready-made memory picture: quality culture as a house.",
+      "points": [
+        "Foundation: ethics, integrity, trust.",
+        "Bricks: training, teamwork, leadership.",
+        "Mortar: communication. Roof: recognition.",
+        "Read the team types, communication directions and recognition discussion within these pages.",
+        "The components depend on each other; recognition cannot compensate for an untrustworthy foundation."
+      ],
+      "memory": "Foundation EIT; bricks TTL; communication binds; recognition crowns.",
+      "question": "List the eight elements of TQM.",
+      "answer": "Ethics, integrity, trust, training, teamwork, leadership, communication and recognition.",
+      "trap": "",
+      "minutes": 13
+    },
+    {
+      "id": "ideatools",
+      "module": "sdl3",
+      "start": 6,
+      "end": 9,
+      "title": "Affinity, tree & interrelations diagrams",
+      "idea": "Different diagrams make different relationships visible.",
+      "points": [
+        "Affinity groups related ideas or verbal information.",
+        "Tree breaks a broad objective into more specific means/actions.",
+        "Interrelations shows cause-and-effect links among issues and identifies drivers/effects.",
+        "Follow the source construction steps and arrow-counting example."
+      ],
+      "memory": "Affinity groups. Tree decomposes. Interrelations connects causes.",
+      "question": "Which tool decomposes a broad objective into specific actions?",
+      "answer": "A tree diagram.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "priority",
+      "module": "sdl3",
+      "start": 10,
+      "end": 11,
+      "title": "Prioritization & PDPC",
+      "idea": "One tool chooses where to act; the other prepares for what could go wrong.",
+      "points": [
+        "Prioritization matrices evaluate options against criteria and ratings; the introductory explanation begins on page 9.",
+        "PDPC maps a proposed process or plan, possible outcomes and countermeasures.",
+        "Study the scoring tables and the lawnmower-related example.",
+        "When explaining a tool, state its purpose, construction and interpretation."
+      ],
+      "memory": "Prioritization = choose. PDPC = anticipate problems and responses.",
+      "question": "What is PDPC used for?",
+      "answer": "To anticipate possible problems or outcomes in a planned process and prepare appropriate countermeasures.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "network",
+      "module": "sdl3",
+      "start": 12,
+      "end": 14,
+      "title": "Activity networks & matrix diagrams",
+      "idea": "Networks organize tasks through time; matrices organize relationships between sets of factors.",
+      "points": [
+        "Activity network/PERT shows dependencies, parallel activities and scheduling.",
+        "Review activities, events, paths, dummy activities and construction rules in the source.",
+        "The expected-time example uses optimistic, most likely and pessimistic estimates; inspect the worked figure and SAQ.",
+        "Matrix diagrams show presence and strength of relationships; review the restaurant example and matrix types."
+      ],
+      "memory": "Network = sequence through time. Matrix = intersections between factor sets.",
+      "question": "What does a matrix diagram reveal?",
+      "answer": "Whether relationships exist between sets of factors and how strong those relationships are.",
+      "trap": "A matrix diagram here is a quality tool, not the matrix organization structure in Module 3.",
+      "minutes": 9
+    },
+    {
+      "id": "tqmimplementation",
+      "module": "sdl3",
+      "start": 15,
+      "end": 17,
+      "title": "Implementing TQM",
+      "idea": "Implementation depends on the organization’s condition and its capacity for change.",
+      "points": [
+        "The notes discuss different organizational scenarios and readiness.",
+        "Compare integrated-management and traditional-management approaches.",
+        "Guidelines include commitment, a shared direction, customer identification/feedback, quality teams and organizational assessment.",
+        "Read the full sequence rather than assuming a single universal implementation formula."
+      ],
+      "memory": "Assess readiness → align people → act on quality → learn from results.",
+      "question": "Why should organizational readiness be assessed before implementing TQM?",
+      "answer": "Its history, culture and ability to change affect the approach and support required for successful implementation.",
+      "trap": "",
+      "minutes": 9
+    },
+    {
+      "id": "measurement",
+      "module": "sdl3",
+      "start": 18,
+      "end": 21,
+      "title": "Measure quality: cost, time & scorecards",
+      "idea": "Measurement gives feedback about whether improvement is working.",
+      "points": [
+        "Cost of poor quality is introduced on page 17 and continued here: waste and non-value-adding activity consume resources.",
+        "Improper time management leaves more effort in firefighting and less in prevention.",
+        "Scorekeeping makes results visible and enables comparison with objectives.",
+        "Read the cost figures, time-management comparison, scorecard and final keywords."
+      ],
+      "memory": "Cost shows waste. Time shows where effort goes. Scorecards show progress.",
+      "question": "Why distinguish firefighting time from prevention time?",
+      "answer": "It reveals whether effort is consumed by recurring problems or invested in preventing them.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "iso",
+      "module": "sdl4",
+      "start": 1,
+      "end": 5,
+      "title": "ISO 9000: purpose, family & benefits",
+      "idea": "These pages describe quality-management-system standards and their historical development.",
+      "points": [
+        "ISO 9000 concerns management systems and quality assurance practices, rather than certifying that every individual product is perfect.",
+        "Read the history and the source’s original ISO 9000/9001/9002/9003/9004/8402 descriptions.",
+        "The PDF then explains the revised ISO 9000:2000 family: vocabulary, requirements and improvement guidance.",
+        "Benefits include confidence, consistency, market access and improved organization, as elaborated in the pages."
+      ],
+      "memory": "A system for consistent quality. Learn the version labels along with the roles.",
+      "question": "Does ISO 9000 simply specify the quality of a single product?",
+      "answer": "No. The supplied unit focuses on the organization’s quality management and assurance system.",
+      "trap": "Historical syllabus content: these notes discuss 1994/2000 versions. This app preserves them for your exam and does not present them as current regulatory guidance.",
+      "minutes": 13
+    },
+    {
+      "id": "isorequirements",
+      "module": "sdl4",
+      "start": 6,
+      "end": 9,
+      "title": "QMS requirements & management responsibility",
+      "idea": "A quality system connects policy, resources, product realization, measurement and improvement.",
+      "points": [
+        "Read the requirements in the source: management commitment, customer focus, policy, planning, responsibilities and review.",
+        "Resource management supports competent people and appropriate infrastructure/work environment.",
+        "Product realization covers planning, customer processes, design, purchasing and production/service control.",
+        "Measurement, analysis and improvement include monitoring, non-conforming output and corrective/preventive action."
+      ],
+      "memory": "Direction → resources → realization → measurement → improvement.",
+      "question": "What should happen when a non-conforming product is detected?",
+      "answer": "Identify and control it to prevent unintended use/delivery, address the cause and retain evidence of correction as described in the PDF.",
+      "trap": "",
+      "minutes": 11
+    },
+    {
+      "id": "documentation",
+      "module": "sdl4",
+      "start": 10,
+      "end": 10,
+      "title": "Documentation: say, do, show",
+      "idea": "Documentation communicates methods, supports consistent action and provides evidence.",
+      "points": [
+        "Read page 9 with the preceding lesson for the quality manual and six required documented procedures in the source edition.",
+        "Those six: document control, record control, internal audit, non-conforming product control, corrective action and preventive action.",
+        "Other documents include specifications, quality plans and records.",
+        "A document provides information; a record provides evidence of results or activities."
+      ],
+      "memory": "Manual = system. Procedure = method. Record = evidence.",
+      "question": "How does a record differ from a procedure?",
+      "answer": "A procedure specifies how an activity is performed; a record provides evidence of results achieved or activities performed.",
+      "trap": "",
+      "minutes": 5
+    },
+    {
+      "id": "isoimplementation",
+      "module": "sdl4",
+      "start": 11,
+      "end": 12,
+      "title": "Implementing ISO 9000 QMS",
+      "idea": "Implementation moves from understanding and documentation to internal correction and external assessment.",
+      "points": [
+        "Exposure/training → draft quality manual → internal audit and incorporation of requirements → external certification audit.",
+        "The notes distinguish organizations starting a QMS, adapting an existing QMS and demonstrating conformity.",
+        "Documentation also supports communication, evidence and knowledge sharing.",
+        "Read the differences between existing process-based arrangements and arrangements needing more definition."
+      ],
+      "memory": "Train → document → audit inside → correct → assess outside.",
+      "question": "Why conduct an internal audit before external assessment?",
+      "answer": "It checks existing practices against requirements and allows deficiencies to be corrected before external evaluation.",
+      "trap": "",
+      "minutes": 7
+    },
+    {
+      "id": "osha",
+      "module": "sdl4",
+      "start": 13,
+      "end": 17,
+      "title": "Occupational safety & OSHA",
+      "idea": "The unit connects quality management with safe and healthy work.",
+      "points": [
+        "Read OSHA’s purposes and the benefits to employers, employees and the public as described in the course material.",
+        "Standard categories: specification, performance, particular/vertical and general/horizontal.",
+        "Safety assessment uses documentation, interviews and site-condition review.",
+        "Key components include leadership/participation/accountability, worksite analysis, hazard prevention/control and safety/health training.",
+        "The source explains why awareness campaigns alone may not ensure safe practice."
+      ],
+      "memory": "Lead and involve → analyze the site → prevent/control hazards → train.",
+      "question": "Name three ways to assess a safety program in the source.",
+      "answer": "Review documents, interview people and inspect site conditions.",
+      "trap": "Study this as supplied course content, not as advice on current legal compliance.",
+      "minutes": 13
+    },
+    {
+      "id": "environment",
+      "module": "sdl4",
+      "start": 18,
+      "end": 19,
+      "title": "ISO 14000 & final quality review",
+      "idea": "Environmental management connects the organization’s activities and product life cycle to environmental effects.",
+      "points": [
+        "Read the ISO 14000 explanation beginning on page 17 with the preceding lesson.",
+        "The source covers environmental policy, auditing, performance evaluation, labeling and life-cycle assessment.",
+        "Policy requires senior-management support and commitments to improvement, pollution prevention and applicable requirements.",
+        "The cycle involves planning, implementation/operation, checking/corrective action and management review.",
+        "Review the summary, glossary and SAQs. The bibliography is retained as source material, not added to the syllabus."
+      ],
+      "memory": "9000: quality system. 14000: environmental system. OSHA: worker safety and health.",
+      "question": "How do ISO 9000 and ISO 14000 differ in focus?",
+      "answer": "ISO 9000 focuses on quality management/customer satisfaction; ISO 14000 focuses on environmental management and the effects of organizational activities.",
+      "trap": "",
+      "minutes": 7
+    }
+  ]
+}
