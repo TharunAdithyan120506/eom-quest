@@ -13,10 +13,13 @@ const CORE = MODS.filter(m => !m.id.startsWith('sdl')), SDL = MODS.filter(m => m
 const PAPERS = [...new Set(QS.map(q => q.paper))].map(p => ({ id: p, date: QS.find(q => q.paper === p).date }));
 const heat = {}; QS.forEach(q => q.topics.forEach(t => heat[t] = (heat[t] || 0) + 1));
 const pyqFor = id => QS.filter(q => q.topics.includes(id));
+/* bookmarks: S.marks maps a lesson id or past-paper question id to the time it was bookmarked */
+const isMarked = id => !!(S.marks && S.marks[id]);
+const markBtn = (id, label = '') => `<button class="mark-btn ${isMarked(id) ? 'on' : ''}" data-act="mark" data-id="${id}" aria-pressed="${isMarked(id)}" title="${isMarked(id) ? 'Remove bookmark' : 'Bookmark to revise later'}"><span class="star">${isMarked(id) ? '★' : '☆'}</span>${label ? `<span class="lbl">${isMarked(id) ? 'Bookmarked' : label}</span>` : ''}</button>`;
 
 /* ---------- state: one saved progress record per person (profile) ---------- */
 const PKEY = 'eomQuest.profiles', pkey = n => 'eomQuest.p.' + n;
-const fresh = () => ({ xp: 0, done: {}, cards: {}, seq: 0, pyq: {}, mocks: [], mockDraft: {}, badges: {}, recallAns: {} });
+const fresh = () => ({ xp: 0, done: {}, cards: {}, seq: 0, pyq: {}, mocks: [], mockDraft: {}, badges: {}, recallAns: {}, marks: {} });
 const lsGet = k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } };
 let P = lsGet(PKEY) || { active: null, list: [] };
@@ -139,6 +142,7 @@ const I = {
   search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   podium: '<path d="M3 21h18M5 21V13h4v8M10 21V8h4v13M15 21v-5h4v5"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
 };
 const icon = n => `<span class="icon"><svg viewBox="0 0 24 24">${I[n]}</svg></span>`;
@@ -176,7 +180,7 @@ const VIS = {
 };
 
 /* ---------- shell ---------- */
-const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['leaderboard', 'podium', 'Leaderboard'], ['trophies', 'trophy', 'Trophies']];
+const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['bookmarks', 'star', 'Bookmarks'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['leaderboard', 'podium', 'Leaderboard'], ['trophies', 'trophy', 'Trophies']];
 function shell(route, body) {
   const r = rank();
   return `<aside class="sidebar" id="sidebar">
@@ -224,6 +228,7 @@ function vDash() {
   <div class="side-stack">
     <div class="card sdl-card"><span class="badge yellow">SDL · 3 MARKS GUARANTEED</span><h3>Quality Management</h3><p>Exactly one 3-mark question comes from the NPTEL/SWAYAM Quality Management material. All 4 units are covered here: easy marks if you prep.</p>
       <a class="btn" href="#/module/sdl1">Enter the quality wing →</a></div>
+    ${(() => { const ml = LES.filter(l => isMarked(l.id)), mq = QS.filter(q => isMarked(q.id)); return ml.length + mq.length ? `<div class="card"><h3>★ To revise (${ml.length + mq.length})</h3><p class="tagline">Your bookmarked topics and questions</p>${ml.slice(0, 5).map(l => `<a class="quest-item" href="#/lesson/${l.id}"><span class="quest-dot">★</span><span>${esc(l.title)}<small>${esc(byM[l.module].subtitle)}</small></span></a>`).join('')}<a class="text-link" style="display:block;margin-top:14px" href="#/bookmarks">See all bookmarks →</a></div>` : ''; })()}
     <div class="card"><h3>🔥 Most-asked topics</h3><p class="tagline">Times each lesson was tested across 8 papers</p>
       ${hot.map(([id, n]) => `<a class="frequency-row" href="#/lesson/${id}"><span class="name">${esc(byL[id].title)}</span><span class="progress"><span style="width:${n / max * 100}%"></span></span><strong>${n}</strong></a>`).join('')}</div>
     <div class="card"><h3>Next quests</h3>
@@ -251,7 +256,7 @@ function vModule(id) {
   return `<div class="breadcrumbs"><a href="#/path">Quest map</a> / <span>${esc(m.title)}</span></div>
   <div class="page-head" style="--accent:${m.color}"><span class="eyebrow">Module ${m.number} · ${esc(m.subtitle)}</span><h1>${esc(m.title)}</h1><p>${esc(m.description)}</p>
     <div class="progress" style="max-width:420px"><span style="width:${pct(p.done, p.total)}%"></span></div><p class="small">${p.done}/${p.total} lessons · ${qs.length} past-paper questions map here</p></div>
-  <div class="lesson-list">${ls.map((l, i) => `<a class="lesson-row" href="#/lesson/${l.id}"><span class="index">${String(i + 1).padStart(2, '0')}</span><div class="grow"><h3>${esc(l.title)} ${flames(l.id)}</h3><p>${esc(l.idea)}</p></div><span class="status ${S.done[l.id] ? 'done' : ''}">${S.done[l.id] ? '✓ Conquered' : 'Start ›'}</span></a>`).join('')}</div>
+  <div class="lesson-list">${ls.map((l, i) => `<a class="lesson-row" href="#/lesson/${l.id}"><span class="index">${String(i + 1).padStart(2, '0')}</span><div class="grow"><h3>${esc(l.title)} ${flames(l.id)}</h3><p>${esc(l.idea)}</p></div>${markBtn(l.id)}<span class="status ${S.done[l.id] ? 'done' : ''}">${S.done[l.id] ? '✓ Conquered' : 'Start ›'}</span></a>`).join('')}</div>
   <div class="bottom-nav"><a class="btn secondary" href="#/recall/${id}">Recall this module →</a>${qs.length ? `<a class="btn secondary" href="#/pyq?m=${id}">Boss battle: ${qs.length} PYQs →</a>` : ''}</div>`;
 }
 
@@ -265,7 +270,7 @@ function vLesson(id) {
   return `<div class="breadcrumbs"><a href="#/path">Quest map</a> / <a href="#/module/${m.id}">${esc(m.title)}</a> / <span>Lesson ${i + 1}</span></div>
   <div class="lesson-layout"><article>
     <span class="eyebrow" style="color:${m.color}">Module ${m.number} · Lesson ${i + 1} of ${ls.length}</span>
-    <h1>${esc(l.title)}</h1><div class="pill-row">${flames(id)}${S.done[id] ? '<span class="badge">✓ Conquered</span>' : ''}<span class="badge grey">Slides ${l.start}–${l.end}</span></div>
+    <h1>${esc(l.title)}</h1><div class="pill-row">${markBtn(id, 'Bookmark')}${flames(id)}${S.done[id] ? '<span class="badge">✓ Conquered</span>' : ''}<span class="badge grey">Slides ${l.start}–${l.end}</span></div>
     <p class="lesson-intro">💡 ${esc(l.idea)}</p>
     <div class="lesson-steps"><span class="on">1 · Learn</span><span>2 · See</span><span>3 · Remember</span><span>4 · Recall</span><span>5 · Apply to PYQs</span></div>
     <section class="notes">${NOTES[id] || ''}</section>
@@ -292,7 +297,7 @@ function vLesson(id) {
 
 function qCard(q, open) {
   const tried = S.pyq[q.id];
-  return `<details class="question-card" ${open ? 'open' : ''}><summary><div class="meta"><span class="badge blue">${esc(q.date)}</span><span class="badge grey">Q${q.label} · ${q.marks} marks</span>${q.topics.map(t => `<span class="topic-chip">${esc(byL[t]?.title || t)}</span>`).join(' · ')}${tried ? '<span class="badge">✓ attempted</span>' : ''}</div><h3>${esc(q.text.slice(0, 260))}${q.text.length > 260 ? '…' : ''}</h3></summary>
+  return `<details class="question-card" ${open ? 'open' : ''}><summary><div class="meta">${markBtn(q.id)}<span class="badge blue">${esc(q.date)}</span><span class="badge grey">Q${q.label} · ${q.marks} marks</span>${q.topics.map(t => `<span class="topic-chip">${esc(byL[t]?.title || t)}</span>`).join(' · ')}${tried ? '<span class="badge">✓ attempted</span>' : ''}</div><h3>${esc(q.text.slice(0, 260))}${q.text.length > 260 ? '…' : ''}</h3></summary>
     <div><div class="original-wrap">${q.images.map(s => `<img class="question-original" loading="lazy" src="${s}" alt="Original question ${q.label}" data-zoom="${s}">`).join('')}</div>
     <h4 class="reading-head">How to attack it</h4><p>${esc(q.tip)}</p>
     <h4 class="reading-head">Points to draw on</h4><ul class="point-list">${q.guide.map(g => `<li>${esc(g)}</li>`).join('')}</ul>
@@ -317,13 +322,13 @@ function vPyq(params) {
 /* recall arena: a deck of every lesson's recall question. Cards leave the deck once mastered; missed cards come back after a few others. */
 let RQ = null;
 function vRecall(mod) {
-  const pool = (mod ? LES.filter(l => l.module === mod) : LES);
+  const pool = mod === 'marked' ? LES.filter(l => isMarked(l.id)) : mod ? LES.filter(l => l.module === mod) : LES;
   const due = pool.filter(l => !isMastered(l.id)).sort((a, b) => ((S.cards[a.id]?.box || 0) - (S.cards[b.id]?.box || 0)) || ((S.cards[a.id]?.seq || 0) - (S.cards[b.id]?.seq || 0)));
   if (!RQ || RQ.mod !== mod) RQ = { mod, i: 0, flipped: false };
   const card = due[0];
   return `<div class="recall-stage"><div class="page-head"><span class="eyebrow">Recall arena</span><h1>Retrieve it, don’t re-read it.</h1>
     <p>Say the answer out loud (or in your head), then flip. Rate honestly: “Missed” and “Partly” put the card back in the deck; “Nailed” twice in a row masters it.</p></div>
-    <div class="pill-row"><a class="pill ${!mod ? 'active' : ''}" href="#/recall">All</a>${MODS.map(m => `<a class="pill ${mod === m.id ? 'active' : ''}" href="#/recall/${m.id}">${m.number}</a>`).join('')}</div>
+    <div class="pill-row"><a class="pill ${!mod ? 'active' : ''}" href="#/recall">All</a><a class="pill ${mod === 'marked' ? 'active' : ''}" href="#/recall/marked">★ Bookmarked</a>${MODS.map(m => `<a class="pill ${mod === m.id ? 'active' : ''}" href="#/recall/${m.id}">${m.number}</a>`).join('')}</div>
     <div class="row between wrap"><p class="tagline">${due.length} left · ${pool.length - due.length} mastered</p>${pool.length - due.length ? `<button class="text-link" data-act="resetdeck" data-mod="${mod || ''}">Reset this deck</button>` : ''}</div>
     ${card ? `<div class="flash-card ${RQ.flipped ? 'flipped' : ''}"><span class="eyebrow">${esc(byM[card.module].title)} · ${esc(card.title)}</span><h2>${esc(card.question)}</h2>
       ${RQ.flipped ? `<div class="answer" style="text-align:left"><h4>Answer</h4><p>${esc(card.answer)}</p></div><p class="small muted">🧠 ${esc(card.memory)}</p>` : '<button class="btn" data-act="flip">Flip card (space)</button>'}</div>
@@ -419,11 +424,14 @@ function vMock(paper) {
         <label class="field-label">Self-mark: <select data-mark="${q.id}">${Array.from({ length: q.marks + 1 }, (_, k) => `<option ${+MK.marks[q.id] === k ? 'selected' : ''}>${k}</option>`).join('')}</select> / ${q.marks}</label>` : ''}</div>`).join('')}`;
 }
 
-function vCram() {
+function vCram(params) {
+  const only = params && params.get('only') === 'marked', show = l => !only || isMarked(l.id);
   return `<div class="page-head"><span class="eyebrow">Cram sheet · last-hour revision</span><h1>Every memory hook on one page</h1><p>Read top to bottom the night before and the morning of the exam. Print it (Ctrl+P) if you like. Tap any title to jump into the full lesson.</p></div>
+    <div class="pill-row"><a class="pill ${only ? '' : 'active'}" href="#/cram">All lessons</a><a class="pill ${only ? 'active' : ''}" href="#/cram?only=marked">★ Bookmarked only (${LES.filter(l => isMarked(l.id)).length})</a></div>
     <div class="alert">🎯 <b>Answer formula for any case question:</b> Concept → Evidence (quote the line) → Why it fits → Action / diagram / example. For comparisons use a table with a “basis of comparison” column.</div>
-    ${MODS.map(m => `<section class="cram-mod" style="--accent:${m.color}"><h2><span class="module-num">${m.number}</span> ${esc(m.subtitle)}</h2>
-      <div class="cram-grid">${lessonsOf(m.id).map(l => `<div class="cram"><a href="#/lesson/${l.id}"><b>${esc(l.title)}</b></a> ${flames(l.id)}<p>🧠 ${esc(l.memory)}</p>${l.trap ? `<p class="trap">⚠️ ${esc(l.trap)}</p>` : ''}</div>`).join('')}</div></section>`).join('')}`;
+    ${only && !LES.some(show) ? '<div class="card empty"><p>No bookmarked lessons yet. Tap ☆ Bookmark on a lesson to add it here.</p></div>' : ''}
+    ${MODS.filter(m => lessonsOf(m.id).some(show)).map(m => `<section class="cram-mod" style="--accent:${m.color}"><h2><span class="module-num">${m.number}</span> ${esc(m.subtitle)}</h2>
+      <div class="cram-grid">${lessonsOf(m.id).filter(show).map(l => `<div class="cram"><div class="row between" style="align-items:flex-start"><a href="#/lesson/${l.id}"><b>${esc(l.title)}</b></a>${markBtn(l.id)}</div>${flames(l.id)}<p>🧠 ${esc(l.memory)}</p>${l.trap ? `<p class="trap">⚠️ ${esc(l.trap)}</p>` : ''}</div>`).join('')}</div></section>`).join('')}`;
 }
 
 function vPlan() {
@@ -532,6 +540,17 @@ async function importFile(file) {
     toast({ tampered: 'This backup has been modified or is damaged, so it was rejected.', version: 'This backup is from a newer version of EOM Quest.', crypto: 'This browser cannot read encrypted backups. Open the app over https or localhost.' }[e.message] || 'That file is not an EOM Quest backup (.eomq).');
   }
 }
+function vBookmarks() {
+  const byTime = (a, b) => (S.marks[b.id] || 0) - (S.marks[a.id] || 0);
+  const ml = LES.filter(l => isMarked(l.id)).sort(byTime), mq = QS.filter(q => isMarked(q.id)).sort(byTime);
+  const head = `<div class="page-head"><span class="eyebrow">Bookmarks</span><h1>Marked for revision</h1>
+    <p>Tap ☆ on any lesson or past-paper question to save it here. Revise them as flash cards, or read just these on the cram sheet.</p></div>`;
+  if (!ml.length && !mq.length) return head + `<div class="card empty"><h2>☆ Nothing bookmarked yet</h2><p>Open a lesson and tap <b>☆ Bookmark</b> next to its title, or tap ☆ on a past-paper question.</p><a class="btn" href="#/path" style="margin-top:14px">Go to the quest map</a></div>`;
+  return head + `<div class="pill-row">${ml.length ? `<a class="btn small" href="#/recall/marked">Revise ${ml.length} as flash cards</a><a class="btn small secondary" href="#/cram?only=marked">Cram sheet: bookmarked only</a>` : ''}</div>
+    ${ml.length ? `<h2 style="margin:22px 0 12px">Lessons (${ml.length})</h2><div class="cram-grid">${ml.map(l => `<div class="cram" style="--accent:${byM[l.module].color}"><div class="row between" style="align-items:flex-start"><a href="#/lesson/${l.id}"><b>${esc(l.title)}</b></a>${markBtn(l.id)}</div>
+      <p class="small muted">${byM[l.module].number} · ${esc(byM[l.module].subtitle)} ${flames(l.id)}</p><p>🧠 ${esc(l.memory)}</p>${l.trap ? `<p class="trap">⚠️ ${esc(l.trap)}</p>` : ''}<a class="text-link" href="#/lesson/${l.id}">Open lesson →</a></div>`).join('')}</div>` : ''}
+    ${mq.length ? `<h2 style="margin:28px 0 12px">Past-paper questions (${mq.length})</h2><div class="question-list">${mq.map(q => qCard(q)).join('')}</div>` : ''}`;
+}
 const notFound = () => '<div class="empty"><h2>Lost in the org chart?</h2><p><a class="text-link" href="#/">Back to dashboard</a></p></div>';
 
 /* ---------- router ---------- */
@@ -548,10 +567,11 @@ function render() {
     case 'module': body = vModule(parts[1]); break;
     case 'lesson': body = vLesson(parts[1]); break;
     case 'recall': body = vRecall(parts[1]); break;
+    case 'bookmarks': body = vBookmarks(); break;
     case 'analysis': case 'quiz': body = vAnalysis(); break;
     case 'pyq': body = vPyq(params); break;
     case 'mock': body = vMock(parts[1]); break;
-    case 'cram': body = vCram(); break;
+    case 'cram': body = vCram(params); break;
     case 'plan': body = vPlan(); break;
     case 'library': body = vLibrary(); break;
     case 'source': body = vSource(parts[1], parts[2]); break;
@@ -578,6 +598,15 @@ document.addEventListener('click', e => {
   if (a === 'rate') { rateCard(id, +b.dataset.r); if (location.hash.startsWith('#/recall')) render(); else { b.parentElement.innerHTML = '<p class="small lime">Saved to your recall deck ✓</p>'; } }
   if (a === 'flip') { RQ.flipped = true; render(); }
   if (a === 'complete') { if (!S.done[id]) { S.done[id] = today(); award(50, 'Lesson conquered'); } const n = LES[LES.indexOf(byL[id]) + 1]; location.hash = n ? '#/lesson/' + n.id : '#/trophies'; }
+  if (a === 'mark') {
+    e.preventDefault();
+    S.marks = S.marks || {};
+    if (S.marks[id]) delete S.marks[id]; else S.marks[id] = Date.now();
+    save(); toast(S.marks[id] ? '★ Bookmarked for revision' : 'Bookmark removed');
+    if (location.hash.startsWith('#/bookmarks') || location.hash === '' || location.hash === '#/') render();
+    else document.querySelectorAll(`[data-act="mark"][data-id="${id}"]`).forEach(el => { const tmp = document.createElement('div'); tmp.innerHTML = markBtn(id, el.querySelector('.lbl') ? 'Bookmark' : ''); el.replaceWith(tmp.firstChild); });
+    return;
+  }
   if (a === 'tried') { if (!S.pyq[id]) { S.pyq[id] = today(); award(20, 'Past question attempted'); } b.textContent = '✓ Attempted'; b.classList.add('secondary'); }
   if (a === 'mocksubmit') { if (confirm('Submit and reveal the guidance?')) { MK.submitted = true; save(); render(); window.scrollTo(0, 0); } }
   if (a === 'mocksave') { const total = Object.values(MK.marks).reduce((x, y) => x + (+y || 0), 0); S.mocks.push({ paper: MK.paper, score: total, date: today() }); delete S.mockDraft[MK.paper]; award(100 + total * 2, `Mock saved: ${total}/50`); MK = null; location.hash = '#/mock'; }
