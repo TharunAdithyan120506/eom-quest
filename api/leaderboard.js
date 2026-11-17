@@ -88,9 +88,11 @@ module.exports = async function handler(req, res) {
       // Existing player: XP may only rise as fast as the app can award it (a burst allowance plus about 3 XP per second).
       const prev = Number(cur.xp || 0), secs = Math.max(0, (now - Number(cur.updated || now)) / 1000);
       if (b.xp > prev + 400 + secs * 3) return res.status(422).json({ error: 'XP increased faster than the app allows.' });
-    } else if (b.xp > b.lessons * 50 + b.pyq * 20 + 3000) {
-      // New player: XP must fit the progress they report.
-      return res.status(422).json({ error: 'XP does not match the reported progress.' });
+    } else {
+      // New player: XP must fit the progress they report (lessons 50, PYQs 20, card reviews up to 10, mocks up to 200, plus a margin).
+      const reviews = int(b.reviews, 0, 1e6) ? b.reviews : 0, mocks = int(b.mocks, 0, 1e4) ? b.mocks : 0;
+      if (b.xp > b.lessons * 50 + b.pyq * 20 + reviews * 10 + mocks * 200 + 1000)
+        return res.status(422).json({ error: 'XP does not match the reported progress.' });
     }
 
     await redis([

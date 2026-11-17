@@ -50,7 +50,7 @@ function award(n, msg) {
 const LB_API = 'api/leaderboard';
 const hex = n => [...crypto.getRandomValues(new Uint8Array(n))].map(b => b.toString(16).padStart(2, '0')).join('');
 const uuid = () => crypto.randomUUID ? crypto.randomUUID() : (h => `${h.slice(0, 8)}-${h.slice(8, 12)}-4${h.slice(13, 16)}-a${h.slice(17, 20)}-${h.slice(20, 32)}`)(hex(16));
-const lbPayload = () => ({ id: S.lb.id, token: S.lb.token, name: S.lb.name, xp: S.xp, lessons: Object.keys(S.done).filter(k => byL[k]).length, pyq: Object.keys(S.pyq).length, mock: S.mocks.length ? Math.max(...S.mocks.map(m => m.score)) : 0 });
+const lbPayload = () => ({ id: S.lb.id, token: S.lb.token, name: S.lb.name, xp: S.xp, lessons: Object.keys(S.done).filter(k => byL[k]).length, pyq: Object.keys(S.pyq).length, mock: S.mocks.length ? Math.max(...S.mocks.map(m => m.score)) : 0, reviews: Object.values(S.cards).reduce((a, c) => a + (c.n || 0), 0), mocks: S.mocks.length });
 async function lbCall(method, body, q = '') {
   let r;
   try { r = await fetch(LB_API + q, { method, headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); }
