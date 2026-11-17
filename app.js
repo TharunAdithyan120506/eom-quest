@@ -24,7 +24,8 @@ let P = lsGet(PKEY) || { active: null, list: [] };
 const legacy = lsGet('eomQuest.v1');
 if (legacy && !P.list.length) { P = { active: 'Me', list: ['Me'] }; lsSet(pkey('Me'), legacy); lsSet(PKEY, P); try { localStorage.removeItem('eomQuest.v1'); } catch {} }
 let S = fresh();
-function loadProfile(name) { P.active = name; if (!P.list.includes(name)) P.list.push(name); lsSet(PKEY, P); S = Object.assign(fresh(), lsGet(pkey(name)) || {}); }
+let lbTimer, LB = {}; // leaderboard state (declared early: loadProfile resets it)
+function loadProfile(name) { P.active = name; if (!P.list.includes(name)) P.list.push(name); lsSet(PKEY, P); S = Object.assign(fresh(), lsGet(pkey(name)) || {}); LB = {}; if (S.lb?.joined) setTimeout(() => lbQueue(1500)); }
 if (P.active) loadProfile(P.active);
 const save = () => { if (P.active && !lsSet(pkey(P.active), S)) toast('Could not save: browser storage is blocked. Use Export on the Profiles page.'); };
 const today = () => new Date().toISOString().slice(0, 10);
@@ -42,6 +43,52 @@ function award(n, msg) {
   checkBadges(); save();
   toast(after.lvl > before ? `Promoted! You are now a ${after.name} 🎉` : `+${n} XP · ${msg}`);
   const x = document.querySelector('.xp'); if (x) x.textContent = S.xp + ' XP';
+  lbQueue();
+}
+
+/* ---------- leaderboard (opt-in; served by api/leaderboard on the deployed site) ---------- */
+const LB_API = 'api/leaderboard';
+const hex = n => [...crypto.getRandomValues(new Uint8Array(n))].map(b => b.toString(16).padStart(2, '0')).join('');
+const uuid = () => crypto.randomUUID ? crypto.randomUUID() : (h => `${h.slice(0, 8)}-${h.slice(8, 12)}-4${h.slice(13, 16)}-a${h.slice(17, 20)}-${h.slice(20, 32)}`)(hex(16));
+const lbPayload = () => ({ id: S.lb.id, token: S.lb.token, name: S.lb.name, xp: S.xp, lessons: Object.keys(S.done).filter(k => byL[k]).length, pyq: Object.keys(S.pyq).length, mock: S.mocks.length ? Math.max(...S.mocks.map(m => m.score)) : 0 });
+async function lbCall(method, body, q = '') {
+  let r;
+  try { r = await fetch(LB_API + q, { method, headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }); }
+  catch { throw new Error('The leaderboard only works on the online version of EOM Quest.'); }
+  let j = {}; try { j = await r.json(); } catch {}
+  if (!r.ok) throw Object.assign(new Error(j.error || 'The leaderboard only works on the online version of EOM Quest.'), { status: r.status });
+  return j;
+}
+function lbQueue(delay = 6000) { if (!S.lb?.joined) return; clearTimeout(lbTimer); lbTimer = setTimeout(lbSync, delay); }
+async function lbSync() {
+  if (!S.lb?.joined) return;
+  try { const j = await lbCall('POST', lbPayload()); S.lb.rank = j.rank; S.lb.error = null; }
+  catch (e) { if (e.status === 429) return lbQueue(); S.lb.error = e.message; }
+  save();
+}
+async function lbLoad() {
+  LB = { loading: true };
+  try { LB = { data: await lbCall('GET', null, S.lb?.id ? '?id=' + encodeURIComponent(S.lb.id) : '') }; }
+  catch (e) { LB = { err: e.message }; }
+  if (location.hash.startsWith('#/leaderboard')) render();
+}
+function vLeaderboard() {
+  if (!LB.loading && !LB.data && !LB.err) lbLoad();
+  const joined = S.lb?.joined, d = LB.data;
+  const joinCard = `<div class="card lb-join"><h2>Join the leaderboard</h2>
+    <p class="muted">Joining shows your <b>display name, XP, lessons conquered, past-paper questions tried and best mock score</b> to everyone using this site. Your score updates automatically as you study. You can leave at any time.</p>
+    <form class="form-inline" data-act="lbjoin" style="margin-top:14px"><input class="field" name="name" maxlength="24" minlength="2" required value="${esc(S.lb?.name || P.active)}" placeholder="Display name"><button class="btn">Join as this name</button></form></div>`;
+  const youCard = joined ? `<div class="card lb-you"><div class="row between wrap"><div><span class="eyebrow">You are playing as</span><h2>${esc(S.lb.name)}</h2>
+      <p class="muted">${d?.you ? `Rank <b class="lime">#${d.you.rank}</b> of ${d.total}` : 'Your first score is being sent…'} · ${S.xp} XP</p>
+      ${S.lb.error ? `<p class="small" style="color:var(--red)">Last update failed: ${esc(S.lb.error)}</p>` : ''}</div>
+      <div class="library-actions"><button class="btn small secondary" data-act="lbrefresh">Refresh</button><button class="btn small danger" data-act="lbleave">Leave</button></div></div></div>` : '';
+  const table = d ? (d.top.length ? `<div class="card"><div class="table-scroll"><table class="lb-table"><thead><tr><th>#</th><th>Name</th><th>Rank</th><th>XP</th><th>Lessons</th><th>PYQs</th><th>Best mock</th></tr></thead><tbody>
+      ${d.top.map((p, i) => `<tr class="${p.me ? 'me' : ''}"><td>${['🥇', '🥈', '🥉'][i] || i + 1}</td><td><b>${esc(p.name)}</b>${p.me ? ' <span class="badge">You</span>' : ''}</td><td class="muted">${rank(p.xp).name}</td><td><b>${p.xp}</b></td><td>${p.lessons}/${LES.length}</td><td>${p.pyq}</td><td>${p.mock ? p.mock + '/50' : '–'}</td></tr>`).join('')}</tbody></table></div>
+      <p class="note" style="margin-top:10px">${d.total} player${d.total === 1 ? '' : 's'} · top 50 shown · scores are reported by each player's browser, so treat it as a friendly board.</p></div>`
+    : '<div class="card empty"><h2>No one on the board yet</h2><p>Be the first to join.</p></div>')
+    : `<div class="card empty"><p>${LB.err ? esc(LB.err) : 'Loading the leaderboard…'}</p>${LB.err ? '<button class="btn small secondary" data-act="lbrefresh">Try again</button>' : ''}</div>`;
+  return `<div class="page-head"><span class="eyebrow">Leaderboard</span><h1>Who's studying hardest?</h1><p>XP comes from conquering lessons, recalling cards, attempting past-paper questions and sitting mocks. Climb the board before the 18th.</p></div>
+    ${joined ? youCard : joinCard}<div style="margin-top:18px">${table}</div>`;
 }
 
 /* ---------- badges ---------- */
@@ -90,6 +137,7 @@ const I = {
   trophy: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  podium: '<path d="M3 21h18M5 21V13h4v8M10 21V8h4v13M15 21v-5h4v5"/>',
   chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
 };
 const icon = n => `<span class="icon"><svg viewBox="0 0 24 24">${I[n]}</svg></span>`;
@@ -127,7 +175,7 @@ const VIS = {
 };
 
 /* ---------- shell ---------- */
-const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['trophies', 'trophy', 'Trophies']];
+const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['leaderboard', 'podium', 'Leaderboard'], ['trophies', 'trophy', 'Trophies']];
 function shell(route, body) {
   const r = rank();
   return `<aside class="sidebar" id="sidebar">
@@ -508,6 +556,7 @@ function render() {
     case 'source': body = vSource(parts[1], parts[2]); break;
     case 'search': body = vSearch(parts.slice(1).join('/')); break;
     case 'trophies': body = vTrophies(); break;
+    case 'leaderboard': body = vLeaderboard(); break;
     default: body = notFound();
   }
   const navKey = { module: 'path', lesson: 'path', source: 'library', search: '', profiles: 'trophies' }[r] ?? r;
@@ -515,7 +564,7 @@ function render() {
   document.title = 'EOM Quest' + (r === 'lesson' && byL[parts[1]] ? ' · ' + byL[parts[1]].title : '');
 }
 let lastRoute = '';
-window.addEventListener('hashchange', () => { const cur = location.hash.split('?')[0]; render(); if (cur !== lastRoute) window.scrollTo(0, 0); lastRoute = cur; });
+window.addEventListener('hashchange', () => { const cur = location.hash.split('?')[0]; if (cur.startsWith('#/leaderboard') && cur !== lastRoute) LB = {}; render(); if (cur !== lastRoute) window.scrollTo(0, 0); lastRoute = cur; });
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
@@ -534,6 +583,8 @@ document.addEventListener('click', e => {
   if (a === 'resetdeck') { LES.filter(l => !b.dataset.mod || l.module === b.dataset.mod).forEach(l => delete S.cards[l.id]); save(); render(); }
   if (a === 'useprofile') { loadProfile(b.dataset.name); MK = null; RQ = null; toast(`Welcome back, ${b.dataset.name}`); location.hash = '#/'; render(); }
   if (a === 'export') exportProfile(b.dataset.name);
+  if (a === 'lbrefresh') { LB = {}; render(); }
+  if (a === 'lbleave') { if (confirm('Remove your entry from the leaderboard?')) { lbCall('DELETE', { id: S.lb.id, token: S.lb.token }).then(() => { S.lb.joined = false; S.lb.rank = null; save(); LB = {}; render(); toast('You left the leaderboard'); }).catch(e => toast(e.message)); } }
   if (a === 'delprofile') { const n = b.dataset.name; if (confirm(`Delete ${n}’s profile and all their progress? Export it first if you want a backup.`)) { try { localStorage.removeItem(pkey(n)); } catch {} P.list = P.list.filter(x => x !== n); if (P.active === n) { P.active = null; S = fresh(); MK = null; } lsSet(PKEY, P); render(); } }
 });
 document.addEventListener('input', e => {
@@ -548,6 +599,12 @@ document.addEventListener('change', e => {
 document.addEventListener('submit', e => {
   const f = e.target.closest('form'); if (!f) return; e.preventDefault();
   if (f.dataset.act === 'search') location.hash = '#/search/' + encodeURIComponent($('#q').value);
+  if (f.dataset.act === 'lbjoin') {
+    const name = f.name.value.trim().slice(0, 24); if (name.length < 2) return;
+    S.lb = { ...(S.lb || {}), id: S.lb?.id || uuid(), token: S.lb?.token || hex(32), name, joined: true }; save();
+    toast('Joining the leaderboard…'); lbSync().then(() => { LB = {}; render(); if (S.lb.error) toast(S.lb.error); });
+    return;
+  }
   if (f.dataset.act === 'newprofile') {
     const n = f.name.value.trim().slice(0, 24); if (!n) return;
     if (P.list.includes(n)) { toast(`${n} already exists, switched to it`); }

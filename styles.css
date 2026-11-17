@@ -45,3 +45,6 @@ details.recap{background:var(--panel)}details.recap .point-list li{font-size:14p
 .heat-table td.heat{text-align:center;font-weight:700;background:color-mix(in srgb,var(--lime) calc(var(--h)*55%),transparent);color:var(--text)}.heat-table th{white-space:nowrap}
 @media(max-width:900px){.analysis-grid{grid-template-columns:1fr}}
 @media print{.notes,.notes strong{color:black}.notes table{background:white}.callout{background:#eef;color:black}}
+/* leaderboard */
+.lb-join,.lb-you{border-color:#5d7a3c;background:linear-gradient(140deg,#243020,#1b2026)}.lb-you h2{margin:4px 0}
+.lb-table tr.me td{background:#2b3622}.lb-table td:first-child{font-size:16px;width:44px}

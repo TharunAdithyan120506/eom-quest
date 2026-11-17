@@ -8,6 +8,7 @@ A self-contained, gamified study app for **HUM 3022 Essentials of Management**: 
 - **Past papers**: all 120 questions as the original images, with guidance on how to answer.
 - **Mock exam**: sit any paper and self-mark; drafts are saved.
 - **Recall arena** (flashcards), **cram sheet**, **battle plan** and a **PDF library** of every slide page.
+- **Leaderboard**: opt-in ranking by XP, lessons, past papers and best mock (online version).
 - **Profiles**: each person's progress (XP, lessons, cards, mocks) is saved in their browser, with encrypted, tamper-checked export/import (`.eomq`) to move it between devices.
 
 ## Run it
@@ -18,12 +19,20 @@ Or serve the folder: `python -m http.server 8765` and visit http://localhost:876
 ## Deploy
 It is a static site: the repository root is the site root.
 - **Vercel**: import the repo, framework preset "Other", no build command, output directory `.` (`vercel.json` adds caching headers).
-- **GitHub Pages**: Settings → Pages → deploy from the `main` branch, root folder.
+- **GitHub Pages**: Settings → Pages → deploy from the `main` branch, root folder. (The leaderboard needs Vercel.)
+
+## Leaderboard
+An opt-in leaderboard runs on a Vercel function (`api/leaderboard.js`) backed by Upstash Redis. To switch it on:
+1. In the Vercel project, open **Storage** → **Create Database** → **Upstash for Redis** (free plan) and connect it to this project.
+2. Redeploy. The function reads `KV_REST_API_URL`/`KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN`) automatically.
+
+Players join from the Leaderboard page; each gets a secret token so nobody else can overwrite their row. The server rejects impossible numbers, XP that grows faster than the app can award it, and more than one update every 5 seconds. Scores are still reported by the browser, so treat it as a friendly board, not a secure one. Opened from disk (`file://`) the page just shows that the leaderboard needs the online version.
 
 ## Project layout
 | Path | Purpose |
 |---|---|
 | `index.html`, `app.js`, `styles.css` | The app (vanilla JS, hash routing) |
+| `api/leaderboard.js` | Vercel function for the leaderboard (Upstash Redis) |
 | `data/bundle.js` | Generated: all content packed for `file://` use |
 | `notes/*.md` | Teaching notes, one `## <lesson-id>` section per lesson |
 | `curriculum.py` | Lesson list, recall questions, memory hooks |
