@@ -52,3 +52,4 @@ details.recap{background:var(--panel)}details.recap .point-list li{font-size:14p
 .mark-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:3px 10px;font-size:12px;line-height:1.6;flex-shrink:0;transition:.15s}.mark-btn .star{font-size:15px;line-height:1}.mark-btn:hover{border-color:var(--yellow);color:var(--yellow)}.mark-btn.on{border-color:#8a7334;background:#3a3220;color:var(--yellow)}
 .lesson-row .mark-btn,.cram .mark-btn,.question-card .mark-btn{padding:2px 8px}
 @media print{.mark-btn{display:none}}
+button.pill{cursor:pointer}.pill[data-act="twfilter"].active{border-color:var(--accent,var(--lime));color:var(--accent,var(--lime));background:color-mix(in srgb,var(--accent,var(--lime)) 14%,transparent)}

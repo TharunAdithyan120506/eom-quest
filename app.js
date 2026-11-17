@@ -344,6 +344,19 @@ function rateCard(id, r) {
 }
 
 /* past-paper analysis: weightage by module, question slot, topic and command word (all computed from the 8 papers) */
+let TW_MOD = ''; // module filter for the topic weightage table
+function applyTopicFilter() {
+  const card = document.getElementById('topic-weightage'); if (!card) return;
+  const total = QS.reduce((a, q) => a + q.marks, 0);
+  let n = 0, marks = 0;
+  card.querySelectorAll('tbody tr').forEach(tr => {
+    const show = !TW_MOD || tr.dataset.mod === TW_MOD;
+    tr.hidden = !show;
+    if (show) { n++; marks += +tr.dataset.marks; tr.querySelector('.tw-rank').textContent = n; }
+  });
+  card.querySelectorAll('[data-act="twfilter"]').forEach(b => { const on = b.dataset.mod === TW_MOD; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
+  card.querySelector('#tw-summary').innerHTML = `${n} topic${n === 1 ? '' : 's'}${TW_MOD ? ` in Module ${byM[TW_MOD].number}` : ''} · <b>${Math.round(marks)}</b> of ${total} marks across all papers (${Math.round(marks / total * 100)}%)${TW_MOD ? ` · ranks shown within the module` : ''}`;
+}
 function vAnalysis() {
   const core = CORE.map(m => m.id), N = PAPERS.length;
   const total = QS.reduce((a, q) => a + q.marks, 0);
@@ -385,9 +398,11 @@ function vAnalysis() {
     ${PAPERS.map(p => { const r = paperMod(p.id); return `<tr><th><a class="text-link" href="#/pyq?p=${p.id}">${esc(p.date)}</a></th>${core.map(m => cell(r[m], 22)).join('')}</tr>`; }).join('')}</tbody></table></div>
     <p class="small muted" style="margin-top:10px">The split is almost identical every time: about 7 · 7 · 9 · 12 · 15 marks for M1 to M5. Every module appears in every paper, so none can be skipped.</p></div>
 
-  <div class="card" style="margin-top:20px"><h2>Topic weightage</h2><p class="tagline">Lessons ranked by total marks across all papers (a question shared by two lessons is split evenly)</p>
-    <div class="table-scroll"><table><thead><tr><th>#</th><th>Lesson</th><th>Module</th><th>Times asked</th><th>Papers</th><th>Marks</th><th>Last seen</th></tr></thead><tbody>
-    ${topics.map(([id, o], i) => `<tr><td>${i + 1}</td><td><a class="text-link" href="#/lesson/${id}">${esc(byL[id].title)}</a></td><td>${byM[byL[id].module].number}</td><td>${o.n}</td><td>${o.papers.size}/${N}</td><td><b>${Math.round(o.marks)}</b></td><td>${lastAsked(o.papers)}</td></tr>`).join('')}</tbody></table></div></div>
+  <div class="card" style="margin-top:20px" id="topic-weightage"><h2>Topic weightage</h2><p class="tagline">Lessons ranked by total marks across all papers (a question shared by two lessons is split evenly)</p>
+    <div class="pill-row" role="group" aria-label="Filter topics by module"><button class="pill ${TW_MOD ? '' : 'active'}" data-act="twfilter" data-mod="" aria-pressed="${!TW_MOD}">All modules (${topics.length})</button>${core.map(m => `<button class="pill ${TW_MOD === m ? 'active' : ''}" data-act="twfilter" data-mod="${m}" aria-pressed="${TW_MOD === m}" style="--accent:${byM[m].color}">${byM[m].number} · ${esc(byM[m].subtitle)} (${topics.filter(([id]) => byL[id].module === m).length})</button>`).join('')}</div>
+    <p class="small muted" id="tw-summary"></p>
+    <div class="table-scroll"><table class="tw-table"><thead><tr><th>#</th><th>Lesson</th><th>Module</th><th>Times asked</th><th>Papers</th><th>Marks</th><th>Last seen</th></tr></thead><tbody>
+    ${topics.map(([id, o], i) => `<tr data-mod="${byL[id].module}" data-marks="${o.marks}"><td class="tw-rank">${i + 1}</td><td><a class="text-link" href="#/lesson/${id}">${esc(byL[id].title)}</a></td><td>${byM[byL[id].module].number}</td><td>${o.n}</td><td>${o.papers.size}/${N}</td><td><b>${Math.round(o.marks)}</b></td><td>${lastAsked(o.papers)}</td></tr>`).join('')}</tbody></table></div></div>
 
   <div class="analysis-grid" style="margin-top:20px">
     <div class="card"><h2>What examiners ask you to do</h2><p class="tagline">Questions containing each command word</p>
@@ -582,6 +597,7 @@ function render() {
   }
   const navKey = { module: 'path', lesson: 'path', source: 'library', search: '', profiles: 'trophies' }[r] ?? r;
   $('#app').innerHTML = shell(navKey, body);
+  if (r === 'analysis' || r === 'quiz') applyTopicFilter();
   document.title = 'EOM Quest' + (r === 'lesson' && byL[parts[1]] ? ' · ' + byL[parts[1]].title : '');
 }
 let lastRoute = '';
@@ -598,6 +614,7 @@ document.addEventListener('click', e => {
   if (a === 'rate') { rateCard(id, +b.dataset.r); if (location.hash.startsWith('#/recall')) render(); else { b.parentElement.innerHTML = '<p class="small lime">Saved to your recall deck ✓</p>'; } }
   if (a === 'flip') { RQ.flipped = true; render(); }
   if (a === 'complete') { if (!S.done[id]) { S.done[id] = today(); award(50, 'Lesson conquered'); } const n = LES[LES.indexOf(byL[id]) + 1]; location.hash = n ? '#/lesson/' + n.id : '#/trophies'; }
+  if (a === 'twfilter') { TW_MOD = b.dataset.mod; applyTopicFilter(); return; }
   if (a === 'mark') {
     e.preventDefault();
     S.marks = S.marks || {};
