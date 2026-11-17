@@ -436,7 +436,7 @@ function vWelcome() {
     <p class="muted">Your XP, lessons, recall cards and mock answers are saved under your name in this browser. Friends sharing this computer can each have their own.</p>
     ${P.list.length ? `<div class="profile-pick">${P.list.map(n => `<button class="btn secondary" data-act="useprofile" data-name="${esc(n)}">${esc(n)}</button>`).join('')}</div><p class="tagline">or start a new one</p>` : ''}
     <form class="form-inline" data-act="newprofile"><input class="field" name="name" maxlength="24" placeholder="Your name" required autofocus><button class="btn">Start →</button></form>
-    <p class="tagline" style="margin-top:18px">Have a backup file? <label class="text-link" style="cursor:pointer">Import progress<input type="file" accept=".json,application/json" data-act="import" hidden></label></p></div>`;
+    <p class="tagline" style="margin-top:18px">Have a backup file? <label class="text-link" style="cursor:pointer">Import progress<input type="file" accept=".eomq" data-act="import" hidden></label></p></div>`;
 }
 function vProfiles() {
   return `<div class="page-head"><span class="eyebrow">Profiles & backup</span><h1>Your progress, saved per person</h1>
@@ -444,20 +444,44 @@ function vProfiles() {
     <div class="lesson-list">${P.list.map(n => { const d = n === P.active ? S : Object.assign(fresh(), lsGet(pkey(n)) || {}); return `<div class="lesson-row"><span class="avatar">${esc(n[0].toUpperCase())}</span><div class="grow"><h3>${esc(n)} ${n === P.active ? '<span class="badge">Active</span>' : ''}</h3><p>${d.xp} XP · ${Object.keys(d.done).length}/${LES.length} lessons · ${Object.keys(d.pyq).length} PYQs tried</p></div>
       <div class="library-actions">${n === P.active ? '' : `<button class="btn small" data-act="useprofile" data-name="${esc(n)}">Switch</button>`}<button class="btn small secondary" data-act="export" data-name="${esc(n)}">Export</button><button class="btn small danger" data-act="delprofile" data-name="${esc(n)}">Delete</button></div></div>`; }).join('')}</div>
     <div class="card" style="margin-top:20px"><h3>Add a person</h3><form class="form-inline" data-act="newprofile" style="margin-top:12px"><input class="field" name="name" maxlength="24" placeholder="Name" required><button class="btn small">Create & switch</button></form></div>
-    <div class="card" style="margin-top:14px"><h3>Import a backup</h3><p class="small muted">Restores progress from an exported .json file (it is added as that person’s profile).</p><label class="btn small secondary" style="margin-top:12px">Choose file<input type="file" accept=".json,application/json" data-act="import" hidden></label></div>`;
+    <div class="card" style="margin-top:14px"><h3>Import a backup</h3><p class="small muted">Restores progress from an exported, encrypted .eomq backup. Edited or damaged files are rejected.</p><label class="btn small secondary" style="margin-top:12px">Choose file<input type="file" accept=".eomq" data-act="import" hidden></label></div>`;
 }
-function exportProfile(name) {
+/* Encrypted backups (.eomq): AES-GCM with a key derived (PBKDF2) from an app passphrase plus a random salt.
+   GCM's authentication tag means any edit to the file makes decryption fail, so altered backups are rejected.
+   File layout: "EOMQ" | version byte | 16-byte salt | 12-byte IV | ciphertext+tag. */
+const BK_MAGIC = [69, 79, 77, 81], BK_VER = 1, BK_PASS = 'eom-quest/hum3022/backup/v1';
+async function bkKey(salt) {
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(BK_PASS), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 150000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function exportProfile(name) {
+  if (!window.crypto?.subtle) { toast('This browser cannot create encrypted backups. Open the app over https or localhost.'); return; }
   const data = name === P.active ? S : lsGet(pkey(name));
-  const blob = new Blob([JSON.stringify({ app: 'eom-quest', name, data }, null, 1)], { type: 'application/json' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `eom-quest-${name.replace(/[^\w-]+/g, '_')}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+  const plain = new TextEncoder().encode(JSON.stringify({ app: 'eom-quest', name, data, at: Date.now() }));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, await bkKey(salt), plain));
+  const blob = new Blob([new Uint8Array([...BK_MAGIC, BK_VER]), salt, iv, ct], { type: 'application/octet-stream' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `eom-quest-${name.replace(/[^\w-]+/g, '_')}.eomq`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast(`Encrypted backup saved for ${name}`);
 }
-function importFile(file) {
-  file.text().then(t => {
-    const j = JSON.parse(t); if (j.app !== 'eom-quest' || !j.data) throw 0;
-    let name = String(j.name || 'Imported').slice(0, 24);
+const validState = d => d && typeof d === 'object' && Number.isFinite(d.xp) && d.xp >= 0 && ['done', 'cards', 'pyq', 'badges'].every(k => d[k] && typeof d[k] === 'object') && Array.isArray(d.mocks);
+async function importFile(file) {
+  try {
+    const buf = new Uint8Array(await file.arrayBuffer());
+    if (buf.length < 34 || !BK_MAGIC.every((b, i) => buf[i] === b)) throw new Error('format');
+    if (buf[4] !== BK_VER) throw new Error('version');
+    if (!window.crypto?.subtle) throw new Error('crypto');
+    const salt = buf.slice(5, 21), iv = buf.slice(21, 33);
+    let plain;
+    try { plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, await bkKey(salt), buf.slice(33)); } catch { throw new Error('tampered'); }
+    const j = JSON.parse(new TextDecoder().decode(plain));
+    if (j.app !== 'eom-quest' || !validState(j.data)) throw new Error('format');
+    const name = String(j.name || 'Imported').slice(0, 24);
     if (P.list.includes(name) && !confirm(`Replace ${name}’s current progress with this backup?`)) return;
     lsSet(pkey(name), j.data); loadProfile(name); save(); toast(`Imported ${name}’s progress`); location.hash = '#/'; render();
-  }).catch(() => toast('That file is not an EOM Quest backup.'));
+  } catch (e) {
+    toast({ tampered: 'This backup has been modified or is damaged, so it was rejected.', version: 'This backup is from a newer version of EOM Quest.', crypto: 'This browser cannot read encrypted backups. Open the app over https or localhost.' }[e.message] || 'That file is not an EOM Quest backup (.eomq).');
+  }
 }
 const notFound = () => '<div class="empty"><h2>Lost in the org chart?</h2><p><a class="text-link" href="#/">Back to dashboard</a></p></div>';
 

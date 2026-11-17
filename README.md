@@ -8,7 +8,7 @@ A self-contained, gamified study app for **HUM 3022 Essentials of Management**: 
 - **Past papers**: all 120 questions as the original images, with guidance on how to answer.
 - **Mock exam**: sit any paper and self-mark; drafts are saved.
 - **Recall arena** (flashcards), **cram sheet**, **battle plan** and a **PDF library** of every slide page.
-- **Profiles**: each person's progress (XP, lessons, cards, mocks) is saved in their browser, with export/import to move it between devices.
+- **Profiles**: each person's progress (XP, lessons, cards, mocks) is saved in their browser, with encrypted, tamper-checked export/import (`.eomq`) to move it between devices.
 
 ## Run it
 Open `index.html` in any browser. No server, build step or internet needed.
