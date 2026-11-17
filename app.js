@@ -68,6 +68,7 @@ async function lbSync() {
 }
 async function lbLoad() {
   LB = { loading: true };
+  if (S.lb?.joined && (S.lb.error || !S.lb.rank)) await lbSync(); // retry a failed or never-sent score first
   try { LB = { data: await lbCall('GET', null, S.lb?.id ? '?id=' + encodeURIComponent(S.lb.id) : '') }; }
   catch (e) { LB = { err: e.message }; }
   if (location.hash.startsWith('#/leaderboard')) render();
