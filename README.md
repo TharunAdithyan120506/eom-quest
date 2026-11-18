@@ -6,6 +6,7 @@ A self-contained, gamified study app for **HUM 3022 Essentials of Management**: 
 - **83 lessons** in syllabus order, each with full teaching notes, a visual summary, a memory hook, an exam trap, an active-recall question and the past-paper questions on that topic.
 - **Paper analysis**: module and topic weightage, the question-number pattern and the command words examiners use.
 - **Past papers**: all 120 questions as the original images, with guidance on how to answer.
+- **Predicted papers**: two full 50-mark papers built from the slot-by-slot past-paper pattern, with model answers.
 - **Mock exam**: sit any paper and self-mark; drafts are saved.
 - **Recall arena** (flashcards), **cram sheet**, **battle plan** and a **PDF library** of every slide page.
 - **Bookmarks**: star any lesson or past-paper question to revise later, as flash cards or a filtered cram sheet.
@@ -36,6 +37,7 @@ Players join from the Leaderboard page; each gets a secret token so nobody else 
 | `api/leaderboard.js` | Vercel function for the leaderboard (Upstash Redis) |
 | `data/bundle.js` | Generated: all content packed for `file://` use |
 | `notes/*.md` | Teaching notes, one `## <lesson-id>` section per lesson |
+| `predicted/*.md` | Predicted papers: `## <slot> | <marks> | <module> | <lessons>` then the question and a `### Model answer` |
 | `curriculum.py` | Lesson list, recall questions, memory hooks |
 | `assets/pages/`, `assets/questions/` | Rendered slide pages and past-paper question crops |
 

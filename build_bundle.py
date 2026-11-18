@@ -50,7 +50,11 @@ def md(text):
             buf = []
             while i < len(lines) and lines[i].strip() and not re.match(r'^(###\s|\||>|\s*(-|\d+\.)\s)', lines[i]):
                 buf.append(lines[i].strip()); i += 1
-            out.append(f'<p>{inline(" ".join(buf))}</p>')
+            # keep question sub-parts such as "i) ... ii) ..." on their own lines
+            html_ = ''
+            for k, b in enumerate(buf):
+                html_ += ('<br>' if k and re.match(r'^[ivx]+\)', b) else (' ' if k else '')) + inline(b)
+            out.append(f'<p>{html_}</p>')
     return '\n'.join(out)
 
 
@@ -86,6 +90,23 @@ for f in sorted((APP / 'notes').glob('*.md')):
         lid, _, body = chunk.partition('\n')
         notes[lid.strip()] = md(body)
 
+# Predicted papers: predicted/*.md -> "# <id> | <title> | <subtitle>" then "## <slot> | <marks> | <module> | <lesson+lesson>"
+# Each question's body is split at "### Model answer" into the question and its answer key.
+predicted = []
+for f in sorted((APP / 'predicted').glob('*.md')):
+    head, *qs = re.split(r'^## ', f.read_text(encoding='utf8'), flags=re.M)
+    pid, title, sub = [x.strip() for x in re.search(r'^# (.+)$', head, re.M).group(1).split('|')]
+    paper = {'id': pid, 'title': title, 'subtitle': sub, 'questions': []}
+    for chunk in qs:
+        line, _, body = chunk.partition('\n')
+        slot, marks, mod, topics = [x.strip() for x in line.split('|')]
+        q, _, a = body.partition('### Model answer')
+        assert a.strip(), f'{f.name} {slot}: missing model answer'
+        paper['questions'].append({'slot': slot, 'marks': int(marks), 'module': mod, 'topics': topics.split('+'),
+                                   'q': md(q.strip()), 'a': md(a.strip())})
+    assert sum(x['marks'] for x in paper['questions']) == 50, f'{f.name} does not total 50 marks'
+    predicted.append(paper)
+
 sources = load('sources.json')
 for d in sources:  # trim whitespace noise to keep the bundle small
     for p in d['pages']:
@@ -93,7 +114,9 @@ for d in sources:  # trim whitespace noise to keep the bundle small
 cur = load('curriculum.json')
 missing = [l['id'] for l in cur['lessons'] if l['id'] not in notes]
 assert not missing, f'lessons without notes: {missing}'
-bundle = {'curriculum': cur, 'questions': load('questions.json'), 'notes': notes, 'sources': sources}
+bundle = {'curriculum': cur, 'questions': load('questions.json'), 'notes': notes, 'predicted': predicted, 'sources': sources}
+bad = [t for pp in predicted for x in pp['questions'] for t in x['topics'] if t not in {l['id'] for l in cur['lessons']}]
+assert not bad, f'unknown lesson ids in predicted papers: {bad}'
 text = json.dumps(bundle, ensure_ascii=False).replace('—', ' - ')  # no em dashes anywhere in the app
 (P / 'bundle.js').write_text('window.EOM=' + text + ';', encoding='utf8')
 print('bundle.js', round((P / 'bundle.js').stat().st_size / 1024), 'KB;', len(notes), 'lesson notes')

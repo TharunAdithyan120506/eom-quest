@@ -143,6 +143,7 @@ const I = {
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   podium: '<path d="M3 21h18M5 21V13h4v8M10 21V8h4v13M15 21v-5h4v5"/>',
   star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
   chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
 };
 const icon = n => `<span class="icon"><svg viewBox="0 0 24 24">${I[n]}</svg></span>`;
@@ -180,7 +181,7 @@ const VIS = {
 };
 
 /* ---------- shell ---------- */
-const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['bookmarks', 'star', 'Bookmarks'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['leaderboard', 'podium', 'Leaderboard'], ['trophies', 'trophy', 'Trophies']];
+const NAV = [['', 'home', 'Dashboard'], ['path', 'map', 'Quest map'], ['recall', 'cards', 'Recall arena'], ['bookmarks', 'star', 'Bookmarks'], ['analysis', 'chart', 'Paper analysis'], ['pyq', 'scroll', 'Past papers'], ['predicted', 'target', 'Predicted papers'], ['mock', 'clock', 'Mock exam'], ['cram', 'flame', 'Cram sheet'], ['plan', 'cal', 'Battle plan'], ['library', 'book', 'PDF library'], ['leaderboard', 'podium', 'Leaderboard'], ['trophies', 'trophy', 'Trophies']];
 function shell(route, body) {
   const r = rank();
   return `<aside class="sidebar" id="sidebar">
@@ -566,6 +567,24 @@ function vBookmarks() {
       <p class="small muted">${byM[l.module].number} · ${esc(byM[l.module].subtitle)} ${flames(l.id)}</p><p>🧠 ${esc(l.memory)}</p>${l.trap ? `<p class="trap">⚠️ ${esc(l.trap)}</p>` : ''}<a class="text-link" href="#/lesson/${l.id}">Open lesson →</a></div>`).join('')}</div>` : ''}
     ${mq.length ? `<h2 style="margin:28px 0 12px">Past-paper questions (${mq.length})</h2><div class="question-list">${mq.map(q => qCard(q)).join('')}</div>` : ''}`;
 }
+/* predicted papers: two full 50-mark papers built from the slot-by-slot past-paper pattern, with answer keys */
+function vPredicted(params) {
+  const papers = D.predicted || [], cur = papers.find(p => p.id === params.get('p')) || papers[0];
+  if (!cur) return notFound();
+  const showAll = params.get('answers') === 'all';
+  const slotBy = cur.questions.reduce((o, q) => ((o[q.slot[0]] = o[q.slot[0]] || []).push(q), o), {});
+  return `<div class="page-head"><span class="eyebrow">Predicted papers · exam practice</span><h1>${esc(cur.title)}</h1><p>${esc(cur.subtitle)}. Built from how each question slot has behaved across all 8 past papers: same order, same marks (5 × 4 + 10 × 3 = 50), plus one 3-mark SDL Quality Management question. Attempt each question before opening its model answer.</p></div>
+    <div class="alert"><b>Honest note:</b> these are predictions from past patterns, not leaked or official questions. The real paper will use different companies and wording; the <i>concepts and answer structure</i> are what carry over.</div>
+    <div class="pill-row">${papers.map(p => `<a class="pill ${p.id === cur.id ? 'active' : ''}" href="#/predicted?p=${p.id}">Paper ${p.id}</a>`).join('')}
+      <a class="pill" href="#/predicted?p=${cur.id}${showAll ? '' : '&answers=all'}">${showAll ? 'Hide all answers' : 'Show all answers'}</a>
+      <button class="pill" data-act="print">Print / save PDF</button></div>
+    <p class="tagline">HUM 3022 · Essentials of Management · 50 marks · 3 hours · answer all questions</p>
+    ${Object.entries(slotBy).map(([n, qs]) => `<h2 class="pp-q">Question ${n}</h2>${qs.map(q => `<div class="card pp-card" style="--accent:${byM[q.module].color}">
+      <div class="row between wrap"><div class="meta"><span class="badge grey">${q.slot} · ${q.marks} marks</span><span class="badge ${q.module.startsWith('sdl') ? 'yellow' : 'blue'}">${q.module.startsWith('sdl') ? 'SDL · Quality Management' : 'Module ' + byM[q.module].number}</span>${q.topics.map(t => `<a class="topic-chip" href="#/lesson/${t}">${esc(byL[t].title)}</a>`).join(' · ')}</div></div>
+      <div class="notes pp-question">${q.q}</div>
+      <details class="pp-answer" ${showAll ? 'open' : ''}><summary>✅ Model answer</summary><div class="notes">${q.a}</div></details></div>`).join('')}`).join('')}
+    <div class="bottom-nav">${papers.filter(p => p.id !== cur.id).map(p => `<a class="btn" href="#/predicted?p=${p.id}">Try Paper ${p.id} →</a>`).join('')}<a class="btn secondary" href="#/mock">Sit a real past paper →</a></div>`;
+}
 const notFound = () => '<div class="empty"><h2>Lost in the org chart?</h2><p><a class="text-link" href="#/">Back to dashboard</a></p></div>';
 
 /* ---------- router ---------- */
@@ -583,6 +602,7 @@ function render() {
     case 'lesson': body = vLesson(parts[1]); break;
     case 'recall': body = vRecall(parts[1]); break;
     case 'bookmarks': body = vBookmarks(); break;
+    case 'predicted': body = vPredicted(params); break;
     case 'analysis': case 'quiz': body = vAnalysis(); break;
     case 'pyq': body = vPyq(params); break;
     case 'mock': body = vMock(parts[1]); break;
@@ -614,6 +634,7 @@ document.addEventListener('click', e => {
   if (a === 'rate') { rateCard(id, +b.dataset.r); if (location.hash.startsWith('#/recall')) render(); else { b.parentElement.innerHTML = '<p class="small lime">Saved to your recall deck ✓</p>'; } }
   if (a === 'flip') { RQ.flipped = true; render(); }
   if (a === 'complete') { if (!S.done[id]) { S.done[id] = today(); award(50, 'Lesson conquered'); } const n = LES[LES.indexOf(byL[id]) + 1]; location.hash = n ? '#/lesson/' + n.id : '#/trophies'; }
+  if (a === 'print') { document.querySelectorAll('.pp-answer').forEach(d => d.open = true); window.print(); return; }
   if (a === 'twfilter') { TW_MOD = b.dataset.mod; applyTopicFilter(); return; }
   if (a === 'mark') {
     e.preventDefault();

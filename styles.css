@@ -53,3 +53,7 @@ details.recap{background:var(--panel)}details.recap .point-list li{font-size:14p
 .lesson-row .mark-btn,.cram .mark-btn,.question-card .mark-btn{padding:2px 8px}
 @media print{.mark-btn{display:none}}
 button.pill{cursor:pointer}.pill[data-act="twfilter"].active{border-color:var(--accent,var(--lime));color:var(--accent,var(--lime));background:color-mix(in srgb,var(--accent,var(--lime)) 14%,transparent)}
+/* predicted papers */
+.pp-q{margin:28px 0 12px}.pp-card{margin:12px 0;border-left:3px solid var(--accent)}.pp-question{margin-top:10px}.pp-question p:first-child{margin-top:4px}
+details.pp-answer{background:#182b20;border-color:#37553a;margin-top:14px}details.pp-answer summary{color:var(--lime)}
+@media print{.pp-card{break-inside:avoid;border-left:2px solid #999}details.pp-answer{background:white}.alert{display:none}}
