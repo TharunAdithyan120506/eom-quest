@@ -37,7 +37,7 @@ Players join from the Leaderboard page; each gets a secret token so nobody else 
 | `api/leaderboard.js` | Vercel function for the leaderboard (Upstash Redis) |
 | `data/bundle.js` | Generated: all content packed for `file://` use |
 | `notes/*.md` | Teaching notes, one `## <lesson-id>` section per lesson |
-| `predicted/*.md` | Predicted papers: `## <slot> | <marks> | <module> | <lessons>` then the question and a `### Model answer` |
+| `predicted/*.md` | Predicted papers: one `##` header per question (slot, marks, module, lessons, separated by pipes), then the question and a `### Model answer` |
 | `curriculum.py` | Lesson list, recall questions, memory hooks |
 | `assets/pages/`, `assets/questions/` | Rendered slide pages and past-paper question crops |
 
